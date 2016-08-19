@@ -5,10 +5,25 @@
  */
 package core.algoritmos;
 
+import core.model.Grafo;
+import core.model.Vertice;
+import java.util.Stack;
+
 /**
  *
  * @author lite
  */
 public class DeepFirstSearch {
+    Grafo grafo;
+    Vertice verticeInicial;
     
+    public DeepFirstSearch(Grafo grafo) {
+        this.grafo = grafo;
+    }
+    
+    public Stack search(int idVerticeInicial, int idVerticeProcurado){
+        Stack<Vertice> stack = new Stack<>();
+        stack.add(grafo.getVertice(idVerticeInicial));
+        return stack;
+    }
 }
