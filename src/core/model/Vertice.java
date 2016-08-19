@@ -16,6 +16,7 @@ public class Vertice {
     private final int id;
     private String rotulo;
     private Point position;
+    boolean visitado = false;
 
     public Vertice(int id, String rotulo) {
         this.id = id;
@@ -27,8 +28,16 @@ public class Vertice {
         this.rotulo = rotulo;
         this.position = position;
     }
-    
 
+    public boolean isVisitado() {
+        return visitado;
+    }
+
+    public void setVisitado(boolean visitado) {
+        this.visitado = visitado;
+    }
+    
+    
     public void setRotulo(String rotulo) {
         this.rotulo = rotulo;
     }
