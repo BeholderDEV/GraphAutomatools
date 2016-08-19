@@ -51,7 +51,28 @@ public class Grafo {
         }
         return null;
     }
-
+    
+    public List<Vertice> getVizinhos(Vertice vertice){
+        List<Vertice> vizinhos = new ArrayList<>();
+        for (Aresta aresta: arestas) {
+            if(aresta.getVertice1()==vertice){
+                vizinhos.add(aresta.getVertice2());
+            }
+            if(aresta.getVertice2()==vertice){
+                vizinhos.add(aresta.getVertice1());
+            }
+        }
+        return vizinhos;
+    }
+    
+    public int getArestasCount(){
+        return arestas.size();
+    }
+    
+    public int getVerticesCount(){
+        return  vertices.size();
+    }
+    
     @Override
     public String toString() {
         String eu="";
