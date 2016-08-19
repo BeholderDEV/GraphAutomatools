@@ -27,7 +27,62 @@ public class BreadthFirstSearch {
         visited = new ArrayList<>();
     }
     
-    public void buscar(int idVerticeInicial, int idVerticeProcurado){
+    public String search(int idVerticeInicial, int idVerticeProcurado){
+        String caminho = "";
         Queue q = new LinkedList();
+        q.add(grafo.getVertice(verticeInicial));
+        visited.add(grafo.getVertice(verticeInicial));
+        
+        while(!q.isEmpty())
+        {
+            Vertice primeiro = (Vertice)q.remove();
+            if(primeiro.getId() == idVerticeProcurado)
+            {
+                return "Vertice Encontrado";
+            }
+            addToVisitedList(primeiro);
+            q.addAll(removeVisited(grafo.getVizinhos(primeiro)));
+        }
+        
+        return "Vertice não encontrado";
+    }
+    
+    private void addToVisitedList(Vertice vertice)
+    {
+        for(Vertice visitado : visited)
+        {
+            if(vertice.getId() == visitado.getId())
+            {
+                return;
+            }
+        }
+        visited.add(vertice);
+    }
+
+    private List<Vertice> removeVisited(List<Vertice> proximosVizinhos) {
+        List<Vertice> naovisitados = new ArrayList<>();
+        
+        for(Vertice vizinho : proximosVizinhos)
+        {
+            if(!isVisited(vizinho))
+            {
+                naovisitados.add(vizinho);
+            }
+        }
+        
+        return naovisitados;
+    }
+    
+    private boolean isVisited(Vertice vizinho)
+    {
+        for(Vertice visitado : visited)
+        {
+            if(vizinho.getId() == visitado.getId())
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
