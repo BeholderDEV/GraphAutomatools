@@ -148,8 +148,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        BreadthFirstSearch search =  new BreadthFirstSearch(LeitorXml.grafoFromXML());
-        jTextArea1.setText(search.search(Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText())));
+        jTextArea1.setText(BreadthFirstSearch.search(LeitorXml.grafoFromXML(), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText())));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

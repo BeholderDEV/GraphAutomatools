@@ -17,21 +17,12 @@ import java.util.Queue;
  * @author Adson Estevesa
  */
 public class BreadthFirstSearch {
-    Grafo grafo;
-    int verticeInicial;
-    int verticeProcurado;
-    List<Vertice> visited;
-
-    public BreadthFirstSearch(Grafo grafo) {
-        this.grafo = grafo;
-        visited = new ArrayList<>();
-    }
     
-    public String search(int idVerticeInicial, int idVerticeProcurado){
+    public static String search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
         String caminho = "";
         Queue q = new LinkedList();
-        q.add(grafo.getVertice(verticeInicial));
-        visited.add(grafo.getVertice(verticeInicial));
+        q.add(grafo.getVertice(idVerticeInicial));
+        grafo.getVertice(idVerticeInicial).setVisitado(true);
         
         while(!q.isEmpty())
         {
@@ -40,49 +31,23 @@ public class BreadthFirstSearch {
             {
                 return "Vertice Encontrado";
             }
-            addToVisitedList(primeiro);
+            primeiro.setVisitado(true);
             q.addAll(removeVisited(grafo.getVizinhos(primeiro)));
         }
         
         return "Vertice não encontrado";
     }
-    
-    private void addToVisitedList(Vertice vertice)
-    {
-        for(Vertice visitado : visited)
-        {
-            if(vertice.getId() == visitado.getId())
-            {
-                return;
-            }
-        }
-        visited.add(vertice);
-    }
 
-    private List<Vertice> removeVisited(List<Vertice> proximosVizinhos) {
+    private static List<Vertice> removeVisited(List<Vertice> proximosVizinhos) {
         List<Vertice> naovisitados = new ArrayList<>();
         
         for(Vertice vizinho : proximosVizinhos)
         {
-            if(!isVisited(vizinho))
+            if(vizinho.isVisitado())
             {
                 naovisitados.add(vizinho);
             }
         }
-        
         return naovisitados;
-    }
-    
-    private boolean isVisited(Vertice vizinho)
-    {
-        for(Vertice visitado : visited)
-        {
-            if(vizinho.getId() == visitado.getId())
-            {
-                return true;
-            }
-        }
-        
-        return false;
     }
 }
