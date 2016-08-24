@@ -10,6 +10,7 @@ import core.algoritmos.DeepFirstSearch;
 import core.model.Grafo;
 import core.model.Vertice;
 import core.web.LeitorXml;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -148,7 +149,24 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jTextArea1.setText(BreadthFirstSearch.search(LeitorXml.grafoFromXML(), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText())));
+        Vertice vertice = BreadthFirstSearch.search(LeitorXml.grafoFromXML(), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+        String resposta = "";
+        if(vertice==null)
+        {
+           resposta = "Vertice não encontrado";
+        }
+        else
+        {
+           resposta = "Vertice encontrado \n caminho: \n";
+           while(vertice.getAnterior()!=null)
+           {
+               resposta = resposta.concat(vertice.getRotulo() + " - ");
+               vertice = vertice.getAnterior();
+           }
+           resposta = resposta.concat(vertice.getRotulo());
+        }
+        
+        jTextArea1.setText(resposta);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

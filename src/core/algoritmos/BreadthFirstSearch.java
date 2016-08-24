@@ -18,7 +18,7 @@ import java.util.Queue;
  */
 public class BreadthFirstSearch {
     
-    public static String search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
+    public static Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
         String caminho = "";
         Queue q = new LinkedList();
         q.add(grafo.getVertice(idVerticeInicial));
@@ -29,22 +29,23 @@ public class BreadthFirstSearch {
             Vertice primeiro = (Vertice)q.remove();
             if(primeiro.getId() == idVerticeProcurado)
             {
-                return "Vertice Encontrado";
+                return primeiro;
             }
             primeiro.setVisitado(true);
-            q.addAll(removeVisited(grafo.getVizinhos(primeiro)));
+            q.addAll(removeVisited(grafo.getVizinhos(primeiro), primeiro));
         }
         
-        return "Vertice não encontrado";
+        return null;
     }
 
-    private static List<Vertice> removeVisited(List<Vertice> proximosVizinhos) {
+    private static List<Vertice> removeVisited(List<Vertice> proximosVizinhos, Vertice primeiro) {
         List<Vertice> naovisitados = new ArrayList<>();
         
         for(Vertice vizinho : proximosVizinhos)
         {
-            if(vizinho.isVisitado())
+            if(!vizinho.isVisitado())
             {
+                vizinho.setAnterior(primeiro);
                 naovisitados.add(vizinho);
             }
         }

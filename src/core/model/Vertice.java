@@ -17,6 +17,7 @@ public class Vertice {
     private String rotulo;
     private Point position;
     boolean visitado = false;
+    private Vertice anterior = null;
 
     public Vertice(int id, String rotulo) {
         this.id = id;
@@ -56,6 +57,14 @@ public class Vertice {
 
     public Point getPosition() {
         return position;
+    }
+
+    public Vertice getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(Vertice anterior) {
+        this.anterior = anterior;
     }
     
 }
