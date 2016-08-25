@@ -17,30 +17,30 @@ import java.util.Stack;
 public class DeepFirstSearch {
     
     
-    public static Stack search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
+    public static Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
         Stack<Vertice> stack = new Stack<>();
         stack.add(grafo.getVertice(idVerticeInicial));
         grafo.getVertice(idVerticeInicial).setVisitado(true);
         while (!stack.isEmpty())  
         {  
-            Vertice vertice=stack.pop();  
-            System.out.print(vertice.getRotulo() + "\t");  
-
+            Vertice vertice=stack.pop();
             ArrayList<Vertice> vizinhos = (ArrayList < Vertice >) grafo.getVizinhos(vertice);  
             for (int i = 0; i < vizinhos.size(); i++) {  
                 Vertice n=vizinhos.get(i);
                 if(n.getId()==idVerticeProcurado){
                     stack.add(n);
-                    return stack;
+                    n.setVisitado(true);
+                    n.setAnterior(vertice);
+                    return n;
                 }
                 if(n!=null && !n.isVisitado())  
                 {  
                     stack.add(n);  
                     n.setVisitado(true);
-
+                    n.setAnterior(vertice);
                 }  
             }  
         }
-        return stack;
+        return null;
     }
 }

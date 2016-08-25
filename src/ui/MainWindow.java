@@ -63,14 +63,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("Inicial");
+        jTextField1.setText("27");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("Procurado");
+        jTextField2.setText("0");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -100,9 +100,9 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jButton1))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -132,11 +132,23 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Stack<Vertice> stack = DeepFirstSearch.search(LeitorXml.grafoFromXML(), Integer.parseInt(jTextField1.getText()) , Integer.parseInt(jTextField2.getText()));
+        Vertice vertice = DeepFirstSearch.search(LeitorXml.grafoFromXML(), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
         String resposta = "";
-        for (Vertice vertice : stack) {
-            resposta = resposta.concat(vertice.getRotulo()+" - ");
+        if(vertice==null)
+        {
+           resposta = "Vertice não encontrado";
         }
+        else
+        {
+           resposta = "Vertice encontrado \n caminho: \n";
+           while(vertice.getAnterior()!=null)
+           {
+               resposta = resposta.concat(vertice.getRotulo() + " - ");
+               vertice = vertice.getAnterior();
+           }
+           resposta = resposta.concat(vertice.getRotulo());
+        }
+        
         jTextArea1.setText(resposta);
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -6,6 +6,8 @@
 package core.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -62,6 +64,7 @@ public class Grafo {
                 vizinhos.add(aresta.getVertice1());
             }
         }
+        Collections.sort(vizinhos, new OrdenaPorRotulo());
         return vizinhos;
     }
     
@@ -89,4 +92,11 @@ public class Grafo {
     }
     
     
+}
+
+class OrdenaPorRotulo implements Comparator<Vertice> {
+    @Override
+    public int compare(Vertice um, Vertice dois) {
+        return um.getRotulo().compareTo(dois.getRotulo());
+    }
 }
