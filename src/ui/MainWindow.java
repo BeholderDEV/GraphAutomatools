@@ -5,6 +5,8 @@
  */
 package ui;
 
+import com.alee.extended.image.DisplayType;
+import com.alee.extended.image.WebImage;
 import core.algoritmos.BreadthFirstSearch;
 import core.algoritmos.DeepFirstSearch;
 import core.algoritmos.SearchAlgorithm;
@@ -17,6 +19,8 @@ import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
 import ui.graph.GraphDrawer;
+import ui.utils.ColorController;
+import ui.webLaf.WeblafUtils;
 
 /**
  *
@@ -24,13 +28,30 @@ import ui.graph.GraphDrawer;
  */
 public class MainWindow extends javax.swing.JFrame {
     private Grafo grafo;
+    GraphDrawer drawer;
     /**
      * Creates new form MainWIndow
      */
     public MainWindow() {
         initComponents();
+        jPanel1.setBackground(ColorController.COR_PRINCIPAL);
+        jLabel1.setForeground(ColorController.COR_LETRA);
+        jLabel2.setForeground(ColorController.COR_LETRA);
+        WeblafUtils.configuraWebLaf(jTextField1);
+        WeblafUtils.configuraWebLaf(jTextField2);
+        WeblafUtils.configurarBotao(webButton1);
+        WeblafUtils.configurarBotao(webButton2);
+        WeblafUtils.configurarBotao(webButton3);
     }
-
+    private void drawGraph(){
+        jPanel4.removeAll();
+        Image image = drawer.drawGraph();
+        WebImage webImage = new WebImage(image);
+        webImage.setDisplayType(DisplayType.fitComponent);
+        jPanel4.add(webImage);
+//        jPanel4.invalidate();
+        jPanel4.revalidate();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,18 +63,32 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        webButton3 = new com.alee.laf.button.WebButton();
+        webButton2 = new com.alee.laf.button.WebButton();
+        webButton1 = new com.alee.laf.button.WebButton();
         jPanel4 = new javax.swing.JPanel();
-        graphLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
         jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
+
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setText("Vertice Inicial");
+        jPanel5.add(jLabel1, java.awt.BorderLayout.WEST);
 
         jTextField1.setText("0");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +96,12 @@ public class MainWindow extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1);
+        jPanel5.add(jTextField1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel5);
+
+        jPanel6.setOpaque(false);
+        jPanel6.setLayout(new java.awt.BorderLayout());
 
         jTextField2.setText("8");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -69,41 +109,46 @@ public class MainWindow extends javax.swing.JFrame {
                 jTextField2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField2);
+        jPanel6.add(jTextField2, java.awt.BorderLayout.CENTER);
+
+        jLabel2.setText("Vertice Procurado");
+        jPanel6.add(jLabel2, java.awt.BorderLayout.WEST);
+
+        jPanel2.add(jPanel6);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
 
-        jButton3.setText("Breadth First");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton3);
+        jPanel3.setOpaque(false);
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        jButton2.setText("Deep First");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        webButton3.setText("Breadth First");
+        webButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                webButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2);
+        jPanel3.add(webButton3);
 
-        jButton1.setText("Ver Grafo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        webButton2.setText("Deep First");
+        webButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                webButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1);
+        jPanel3.add(webButton2);
+
+        webButton1.setText("Carregar");
+        webButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(webButton1);
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.SOUTH);
 
+        jPanel4.setOpaque(false);
         jPanel4.setLayout(new java.awt.BorderLayout());
-
-        graphLabel.setPreferredSize(new java.awt.Dimension(800, 600));
-        jPanel4.add(graphLabel, java.awt.BorderLayout.CENTER);
-
         jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -111,15 +156,21 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        grafo = XMLReader.grafoFromXML();
-        GraphDrawer drawer = new GraphDrawer(grafo);
-        Image image = drawer.drawGraph();
-        graphLabel.setIcon(new ImageIcon(image));
-//        jTextArea1.setText(grafo.toString());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void webButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton1ActionPerformed
+        grafo = XMLReader.grafoFromXML();
+        drawer = new GraphDrawer(grafo);
+        drawGraph();
+    }//GEN-LAST:event_webButton1ActionPerformed
+
+    private void webButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton2ActionPerformed
         if(grafo!=null){
             grafo.resetVisitedsandHinteds();
             SearchAlgorithm sa = new DeepFirstSearch();
@@ -131,25 +182,16 @@ public class MainWindow extends javax.swing.JFrame {
                 aresta.setHinted(true);
                 vertice = vertice.getAnterior();
             }
-            GraphDrawer drawer = new GraphDrawer(grafo);
-            Image image = drawer.drawHintedGraph();
-            graphLabel.setIcon(new ImageIcon(image));
+            drawGraph();
+            
 //            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{
 //            jTextArea1.setText("Carregue um Grafo");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_webButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void webButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton3ActionPerformed
         if(grafo!=null){
             grafo.resetVisitedsandHinteds();
             SearchAlgorithm sa = new BreadthFirstSearch();
@@ -161,15 +203,13 @@ public class MainWindow extends javax.swing.JFrame {
                 aresta.setHinted(true);
                 vertice = vertice.getAnterior();
             }
-            GraphDrawer drawer = new GraphDrawer(grafo);
-            Image image = drawer.drawHintedGraph();
-            graphLabel.setIcon(new ImageIcon(image));
+            drawGraph();
 //            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{
 //            jTextArea1.setText("Carregue um Grafo");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_webButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,15 +248,18 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel graphLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private com.alee.laf.button.WebButton webButton1;
+    private com.alee.laf.button.WebButton webButton2;
+    private com.alee.laf.button.WebButton webButton3;
     // End of variables declaration//GEN-END:variables
 }
