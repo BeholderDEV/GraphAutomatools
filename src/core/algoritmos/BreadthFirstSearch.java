@@ -19,7 +19,11 @@ import java.util.Queue;
 public class BreadthFirstSearch {
     
     public static Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
-        String caminho = "";
+        
+        if(idVerticeInicial == idVerticeProcurado)
+        {
+            return grafo.getVertice(idVerticeInicial);
+        }
         Queue q = new LinkedList();
         q.add(grafo.getVertice(idVerticeInicial));
         grafo.getVertice(idVerticeInicial).setVisitado(true);
@@ -27,12 +31,20 @@ public class BreadthFirstSearch {
         while(!q.isEmpty())
         {
             Vertice primeiro = (Vertice)q.remove();
-            if(primeiro.getId() == idVerticeProcurado)
-            {
-                return primeiro;
-            }
             primeiro.setVisitado(true);
-            q.addAll(removeVisited(grafo.getVizinhos(primeiro), primeiro));
+            
+            for(Vertice vizinho : grafo.getVizinhos(primeiro))
+            {
+                if(!vizinho.isVisitado())
+                {
+                    vizinho.setAnterior(primeiro);
+                    q.add(vizinho);
+                    if(vizinho.getId() == idVerticeProcurado)
+                    {
+                        return vizinho;
+                    }
+                }
+            }
         }
         
         return null;
