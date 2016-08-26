@@ -5,8 +5,8 @@
  */
 package core.algoritmos;
 
-import core.model.Graph;
-import core.model.Fork;
+import core.model.Grafo;
+import core.model.Vertice;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -19,10 +19,10 @@ public class DeepFirstSearch implements SearchAlgorithm{
     
     
     @Override
-    public Fork search(Graph grafo, int idVerticeInicial, int idVerticeProcurado){
-        Fork verticeInicial = grafo.getVertice(idVerticeInicial);
+    public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
+        Vertice verticeInicial = grafo.getVertice(idVerticeInicial);
         verticeInicial.setVisitado(true);
-        for(Fork n: grafo.getVizinhos(verticeInicial))
+        for(Vertice n: grafo.getVizinhos(verticeInicial))
         {
             //if childs state is not visited then recurse
             if(!n.isVisitado())
@@ -31,7 +31,7 @@ public class DeepFirstSearch implements SearchAlgorithm{
                 if(n.getId() == idVerticeProcurado){
                     return n;
                 }
-                Fork son = search(grafo, n.getId(), idVerticeProcurado);
+                Vertice son = search(grafo, n.getId(), idVerticeProcurado);
                 if(son != null){
                     return son;
                 }

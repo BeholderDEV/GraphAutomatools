@@ -5,13 +5,13 @@
  */
 package core.algoritmos;
 
-import core.model.Graph;
-import core.model.Fork;
+import core.model.Grafo;
+import core.model.Vertice;
 
 /**
  *
  * @author lite
  */
 public interface SearchAlgorithm {
-     public Fork search(Graph grafo, int idVerticeInicial, int idVerticeProcurado);
+     public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado);
 }

@@ -10,9 +10,9 @@ package core.web;
 
 //package ???;
 
-import core.model.Edge;
-import core.model.Graph;
-import core.model.Fork;
+import core.model.Aresta;
+import core.model.Grafo;
+import core.model.Vertice;
 import java.awt.Point;
 import java.io.*;
 import javax.swing.JFileChooser;
@@ -38,8 +38,8 @@ import org.w3c.dom.NodeList;
 
 public class XMLReader {
 
-    public static Graph grafoFromXML() {
-        Graph grafo= new Graph();
+    public static Grafo grafoFromXML() {
+        Grafo grafo= new Grafo();
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Arquivo XML", "xml");
@@ -69,7 +69,7 @@ public class XMLReader {
                             String rotulo = element.getAttribute("rotulo");
                             int posX = Integer.parseInt(element.getAttribute("posX"));
                             int posY = Integer.parseInt(element.getAttribute("posY"));
-                            grafo.addVertice(new Fork(relId,rotulo, new Point(posX, posY)));
+                            grafo.addVertice(new Vertice(relId,rotulo, new Point(posX, posY)));
                         }
                     }
                     nodes = doc.getElementsByTagName("Aresta");
@@ -80,7 +80,7 @@ public class XMLReader {
                             int idVertice1 = Integer.parseInt(element.getAttribute("idVertice1"));
                             int idVertice2 = Integer.parseInt(element.getAttribute("idVertice2"));
                             double peso = Double.parseDouble(element.getAttribute("peso"));
-                            grafo.addAresta(new Edge(grafo.getVertice(idVertice1), grafo.getVertice(idVertice2), peso));
+                            grafo.addAresta(new Aresta(grafo.getVertice(idVertice1), grafo.getVertice(idVertice2), peso));
                         }
                     }
                     return grafo;

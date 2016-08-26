@@ -5,7 +5,7 @@
  */
 package core.util;
 
-import core.model.Fork;
+import core.model.Vertice;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,8 +16,8 @@ import java.util.List;
  * @author lite
  */
 public class VerticeUtils {
-    public static List<Fork> getVerticesPath(Fork vertice){
-        List<Fork> vertices = new ArrayList<>();
+    public static List<Vertice> getVerticesPath(Vertice vertice){
+        List<Vertice> vertices = new ArrayList<>();
         while(vertice.getAnterior()!=null)
         {
             vertices.add(vertice);
@@ -28,10 +28,10 @@ public class VerticeUtils {
         return vertices;
     }
     
-    public static String getPath(Fork vertice){
+    public static String getPath(Vertice vertice){
         String resposta = "";
         String path="";
-        List<Fork> vertices = new ArrayList<>();
+        List<Vertice> vertices = new ArrayList<>();
         if(vertice==null)
         {
            resposta = "Vertice não encontrado";
@@ -40,7 +40,7 @@ public class VerticeUtils {
         {
            resposta = "Vertice encontrado \n caminho: \n";
            vertices = VerticeUtils.getVerticesPath(vertice);
-            for (Fork vertice1 : vertices) {
+            for (Vertice vertice1 : vertices) {
                 path = path.concat(vertice1.getRotulo()+" - ");
             }
             path = path.substring(0, path.length()-3);

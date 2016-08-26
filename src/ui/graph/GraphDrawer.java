@@ -5,9 +5,9 @@
  */
 package ui.graph;
 
-import core.model.Edge;
-import core.model.Fork;
-import core.model.Graph;
+import core.model.Aresta;
+import core.model.Vertice;
+import core.model.Grafo;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,12 +21,12 @@ import java.awt.image.BufferedImage;
  * @author lite
  */
 public class GraphDrawer {
-    private Graph graph;
+    private Grafo graph;
     private int nodeSize = 35;
     private int width;
     private  int height;
     
-    public GraphDrawer(Graph graph) {
+    public GraphDrawer(Grafo graph) {
         this.graph = graph;
     }
     
@@ -39,11 +39,43 @@ public class GraphDrawer {
         gd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gd.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         
-        for (Edge edge: graph.getArestas()) {
+        for (Aresta edge: graph.getArestas()) {
             gd.setColor(Color.DARK_GRAY);
             gd.drawLine(edge.getVertice1().getPosition().x, edge.getVertice1().getPosition().y, edge.getVertice2().getPosition().x, edge.getVertice2().getPosition().y);
         }
-        for (Fork fork: graph.getVertices()) {
+        for (Vertice fork: graph.getVertices()) {
+            gd.setColor(Color.ORANGE);
+            gd.fillOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
+            gd.setColor(Color.BLACK);
+                
+            width = gd.getFontMetrics().stringWidth(fork.getRotulo());
+            height = gd.getFontMetrics().getHeight()-gd.getFontMetrics().getDescent();
+            gd.drawString(fork.getRotulo(),fork.getPosition().x-(width/2), fork.getPosition().y+(height/2));
+            
+            
+        }
+        
+        return  bufferedImage;
+    }
+    public Image drawHintedGraph(){
+        Point size = getGraphSize();
+        BufferedImage bufferedImage = new BufferedImage(size.x, size.y, BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics g = bufferedImage.getGraphics();
+        Graphics2D gd = (Graphics2D) g;
+        
+        gd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        gd.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        
+        for (Aresta edge: graph.getArestas()) {
+            if(edge.isHinted()){
+                gd.setColor(Color.MAGENTA);
+            }
+            else{
+                gd.setColor(Color.DARK_GRAY);
+            }
+            gd.drawLine(edge.getVertice1().getPosition().x, edge.getVertice1().getPosition().y, edge.getVertice2().getPosition().x, edge.getVertice2().getPosition().y);
+        }
+        for (Vertice fork: graph.getVertices()) {
             gd.setColor(Color.ORANGE);
             gd.fillOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
             gd.setColor(Color.BLACK);
@@ -60,7 +92,7 @@ public class GraphDrawer {
     
     private Point getGraphSize(){
         Point point = new Point();
-        for (Fork fork: graph.getVertices()) {
+        for (Vertice fork: graph.getVertices()) {
             if(fork.getPosition().x>point.x){
                 point.x=fork.getPosition().x;
             }

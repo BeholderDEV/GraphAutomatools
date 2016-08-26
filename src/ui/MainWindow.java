@@ -8,11 +8,13 @@ package ui;
 import core.algoritmos.BreadthFirstSearch;
 import core.algoritmos.DeepFirstSearch;
 import core.algoritmos.SearchAlgorithm;
-import core.model.Graph;
-import core.model.Fork;
+import core.model.Aresta;
+import core.model.Grafo;
+import core.model.Vertice;
 import core.util.VerticeUtils;
 import core.web.XMLReader;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.ImageIcon;
 import ui.graph.GraphDrawer;
 
@@ -21,7 +23,7 @@ import ui.graph.GraphDrawer;
  * @author lite
  */
 public class MainWindow extends javax.swing.JFrame {
-    private Graph grafo;
+    private Grafo grafo;
     /**
      * Creates new form MainWIndow
      */
@@ -119,9 +121,19 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(grafo!=null){
-            grafo.resetVisiteds();
+            grafo.resetVisitedsandHinteds();
             SearchAlgorithm sa = new DeepFirstSearch();
-            Fork vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            Vertice vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            Aresta aresta;
+            while(vertice.getAnterior()!=null)
+            {
+                aresta = grafo.getAresta(vertice.getId(), vertice.getAnterior().getId());
+                aresta.setHinted(true);
+                vertice = vertice.getAnterior();
+            }
+            GraphDrawer drawer = new GraphDrawer(grafo);
+            Image image = drawer.drawHintedGraph();
+            graphLabel.setIcon(new ImageIcon(image));
 //            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{
@@ -139,9 +151,19 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(grafo!=null){
-            grafo.resetVisiteds();
+            grafo.resetVisitedsandHinteds();
             SearchAlgorithm sa = new BreadthFirstSearch();
-            Fork vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            Vertice vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            Aresta aresta;
+            while(vertice.getAnterior()!=null)
+            {
+                aresta = grafo.getAresta(vertice.getId(), vertice.getAnterior().getId());
+                aresta.setHinted(true);
+                vertice = vertice.getAnterior();
+            }
+            GraphDrawer drawer = new GraphDrawer(grafo);
+            Image image = drawer.drawHintedGraph();
+            graphLabel.setIcon(new ImageIcon(image));
 //            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{

@@ -9,35 +9,44 @@ package core.model;
  *
  * @author lite
  */
-public class Edge {
-    private Fork vertice1;
-    private Fork vertice2;
+public class Aresta {
+    private Vertice vertice1;
+    private Vertice vertice2;
     private Double peso;
+    private boolean hinted=false;
 
-    public Edge(Fork vertice1, Fork vertice2, Double peso) {
+    public Aresta(Vertice vertice1, Vertice vertice2, Double peso) {
         this.vertice1 = vertice1;
         this.vertice2 = vertice2;
         this.peso = peso;
     }
 
-    public Edge(Fork vertice1, Fork vertice2) {
+    public boolean isHinted() {
+        return hinted;
+    }
+
+    public void setHinted(boolean hinted) {
+        this.hinted = hinted;
+    }
+    
+    public Aresta(Vertice vertice1, Vertice vertice2) {
         this.vertice1 = vertice1;
         this.vertice2 = vertice2;
     }
 
-    public Fork getVertice1() {
+    public Vertice getVertice1() {
         return vertice1;
     }
 
-    public void setVertice1(Fork vertice1) {
+    public void setVertice1(Vertice vertice1) {
         this.vertice1 = vertice1;
     }
 
-    public Fork getVertice2() {
+    public Vertice getVertice2() {
         return vertice2;
     }
 
-    public void setVertice2(Fork vertice2) {
+    public void setVertice2(Vertice vertice2) {
         this.vertice2 = vertice2;
     }
 
