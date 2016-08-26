@@ -14,26 +14,26 @@ import java.util.List;
  *
  * @author lite
  */
-public class Grafo {
-    List<Vertice> vertices;
-    List<Aresta> arestas;
+public class Graph {
+    List<Fork> vertices;
+    List<Edge> arestas;
 
-    public Grafo() {
+    public Graph() {
         vertices = new ArrayList<>();
         arestas = new ArrayList<>();
     }
 
-    public Grafo(List<Vertice> vertices, List<Aresta> arestas) {
+    public Graph(List<Fork> vertices, List<Edge> arestas) {
         this.vertices = vertices;
         this.arestas = arestas;
     }
     
-    public void addVertice(Vertice vertice){
+    public void addVertice(Fork vertice){
         vertices.add(vertice);
     }
 
-    public Vertice getVertice(int id){
-        for (Vertice vertice : vertices) {
+    public Fork getVertice(int id){
+        for (Fork vertice : vertices) {
             if(vertice.getId()==id){
                 return vertice;
             }
@@ -41,12 +41,12 @@ public class Grafo {
         return null;
     }
     
-    public void addAresta(Aresta aresta){
+    public void addAresta(Edge aresta){
         arestas.add(aresta);
     }
     
-    public Aresta getAresta(int idV1,int idV2){
-        for (Aresta aresta: arestas) {
+    public Edge getAresta(int idV1,int idV2){
+        for (Edge aresta: arestas) {
             if(aresta.getVertice1().getId()==idV1 && aresta.getVertice2().getId()==idV2 || aresta.getVertice1().getId()==idV2 && aresta.getVertice2().getId()==idV1){
                 return aresta;
             }
@@ -54,9 +54,9 @@ public class Grafo {
         return null;
     }
     
-    public List<Vertice> getVizinhos(Vertice vertice){
-        List<Vertice> vizinhos = new ArrayList<>();
-        for (Aresta aresta: arestas) {
+    public List<Fork> getVizinhos(Fork vertice){
+        List<Fork> vizinhos = new ArrayList<>();
+        for (Edge aresta: arestas) {
             if(aresta.getVertice1()==vertice){
                 vizinhos.add(aresta.getVertice2());
             }
@@ -80,28 +80,28 @@ public class Grafo {
     public String toString() {
         String eu="";
         eu = eu.concat("Vertices\n");
-        for (Vertice vertice : vertices) {
+        for (Fork vertice : vertices) {
             eu = eu.concat(vertice.getRotulo()+"\n");
         }
         
         eu = eu.concat("Arestas\n");
-        for (Aresta aresta : arestas) {
+        for (Edge aresta : arestas) {
             eu = eu.concat(aresta.getVertice1().getRotulo()+" ---- "+aresta.getPeso()+" ---- "+aresta.getVertice2().getRotulo()+"\n");
         }
         return eu;
     }
     
     public void resetVisiteds(){
-        for (Vertice vertice : vertices) {
+        for (Fork vertice : vertices) {
             vertice.setVisitado(false);
         }
     }
     
 }
 
-class OrdenaPorRotulo implements Comparator<Vertice> {
+class OrdenaPorRotulo implements Comparator<Fork> {
     @Override
-    public int compare(Vertice um, Vertice dois) {
+    public int compare(Fork um, Fork dois) {
         return um.getRotulo().compareTo(dois.getRotulo());
     }
 }

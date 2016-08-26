@@ -5,8 +5,8 @@
  */
 package core.algoritmos;
 
-import core.model.Grafo;
-import core.model.Vertice;
+import core.model.Graph;
+import core.model.Fork;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -17,7 +17,7 @@ import java.util.Queue;
 public class BreadthFirstSearch implements SearchAlgorithm{
     
     @Override
-    public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
+    public Fork search(Graph grafo, int idVerticeInicial, int idVerticeProcurado){
         
         if(idVerticeInicial == idVerticeProcurado)
         {
@@ -29,10 +29,10 @@ public class BreadthFirstSearch implements SearchAlgorithm{
         
         while(!q.isEmpty())
         {
-            Vertice primeiro = (Vertice)q.remove();
+            Fork primeiro = (Fork)q.remove();
             primeiro.setVisitado(true);
             
-            for(Vertice vizinho : grafo.getVizinhos(primeiro))
+            for(Fork vizinho : grafo.getVizinhos(primeiro))
             {
                 if(!vizinho.isVisitado())
                 {

@@ -12,19 +12,19 @@ import java.awt.Point;
  *
  * @author lite
  */
-public class Vertice {
+public class Fork {
     private final int id;
     private String rotulo;
     private Point position;
     boolean visitado = false;
-    private Vertice anterior = null;
+    private Fork anterior = null;
 
-    public Vertice(int id, String rotulo) {
+    public Fork(int id, String rotulo) {
         this.id = id;
         this.rotulo = rotulo;
     }
 
-    public Vertice(int id, String rotulo, Point position) {
+    public Fork(int id, String rotulo, Point position) {
         this.id = id;
         this.rotulo = rotulo;
         this.position = position;
@@ -59,11 +59,11 @@ public class Vertice {
         return position;
     }
 
-    public Vertice getAnterior() {
+    public Fork getAnterior() {
         return anterior;
     }
 
-    public void setAnterior(Vertice anterior) {
+    public void setAnterior(Fork anterior) {
         this.anterior = anterior;
     }
     

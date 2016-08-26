@@ -9,35 +9,35 @@ package core.model;
  *
  * @author lite
  */
-public class Aresta {
-    private Vertice vertice1;
-    private Vertice vertice2;
+public class Edge {
+    private Fork vertice1;
+    private Fork vertice2;
     private Double peso;
 
-    public Aresta(Vertice vertice1, Vertice vertice2, Double peso) {
+    public Edge(Fork vertice1, Fork vertice2, Double peso) {
         this.vertice1 = vertice1;
         this.vertice2 = vertice2;
         this.peso = peso;
     }
 
-    public Aresta(Vertice vertice1, Vertice vertice2) {
+    public Edge(Fork vertice1, Fork vertice2) {
         this.vertice1 = vertice1;
         this.vertice2 = vertice2;
     }
 
-    public Vertice getVertice1() {
+    public Fork getVertice1() {
         return vertice1;
     }
 
-    public void setVertice1(Vertice vertice1) {
+    public void setVertice1(Fork vertice1) {
         this.vertice1 = vertice1;
     }
 
-    public Vertice getVertice2() {
+    public Fork getVertice2() {
         return vertice2;
     }
 
-    public void setVertice2(Vertice vertice2) {
+    public void setVertice2(Fork vertice2) {
         this.vertice2 = vertice2;
     }
 

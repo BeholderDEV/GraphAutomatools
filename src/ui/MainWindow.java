@@ -8,17 +8,17 @@ package ui;
 import core.algoritmos.BreadthFirstSearch;
 import core.algoritmos.DeepFirstSearch;
 import core.algoritmos.SearchAlgorithm;
-import core.model.Grafo;
-import core.model.Vertice;
+import core.model.Graph;
+import core.model.Fork;
 import core.util.VerticeUtils;
-import core.web.LeitorXml;
+import core.web.XMLReader;
 
 /**
  *
  * @author lite
  */
 public class MainWindow extends javax.swing.JFrame {
-    private Grafo grafo;
+    private Graph grafo;
     /**
      * Creates new form MainWIndow
      */
@@ -127,7 +127,7 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        grafo = LeitorXml.grafoFromXML();
+        grafo = XMLReader.grafoFromXML();
         jTextArea1.setText(grafo.toString());
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -135,7 +135,7 @@ public class MainWindow extends javax.swing.JFrame {
         if(grafo!=null){
             grafo.resetVisiteds();
             SearchAlgorithm sa = new DeepFirstSearch();
-            Vertice vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            Fork vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
             jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{
@@ -155,7 +155,7 @@ public class MainWindow extends javax.swing.JFrame {
         if(grafo!=null){
             grafo.resetVisiteds();
             SearchAlgorithm sa = new BreadthFirstSearch();
-            Vertice vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            Fork vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
             jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{
