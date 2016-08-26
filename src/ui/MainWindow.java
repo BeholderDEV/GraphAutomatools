@@ -7,6 +7,7 @@ package ui;
 
 import com.alee.extended.image.DisplayType;
 import com.alee.extended.image.WebImage;
+import com.alee.laf.WebLookAndFeel;
 import core.algoritmos.BreadthFirstSearch;
 import core.algoritmos.DeepFirstSearch;
 import core.algoritmos.SearchAlgorithm;
@@ -17,7 +18,10 @@ import core.util.VerticeUtils;
 import core.web.XMLReader;
 import java.awt.Image;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.UnsupportedLookAndFeelException;
 import ui.graph.GraphDrawer;
 import ui.utils.ColorController;
 import ui.webLaf.WeblafUtils;
@@ -34,14 +38,19 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
-        jPanel1.setBackground(ColorController.COR_PRINCIPAL);
-        jLabel1.setForeground(ColorController.COR_LETRA);
-        jLabel2.setForeground(ColorController.COR_LETRA);
+        configura();
+    }
+    
+    private void configura(){
+        WeblafUtils.instalaWeblaf();
         WeblafUtils.configuraWebLaf(jTextField1);
         WeblafUtils.configuraWebLaf(jTextField2);
         WeblafUtils.configurarBotao(webButton1);
         WeblafUtils.configurarBotao(webButton2);
         WeblafUtils.configurarBotao(webButton3);
+        jPanel1.setBackground(ColorController.COR_PRINCIPAL);
+        jLabel1.setForeground(ColorController.COR_LETRA);
+        jLabel2.setForeground(ColorController.COR_LETRA);
     }
     private void drawGraph(){
         jPanel4.removeAll();
@@ -82,10 +91,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setOpaque(false);
+        jPanel2.setPreferredSize(new java.awt.Dimension(73, 40));
         jPanel2.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
 
         jPanel5.setOpaque(false);
-        jPanel5.setLayout(new java.awt.BorderLayout());
+        jPanel5.setLayout(new java.awt.BorderLayout(10, 0));
 
         jLabel1.setText("Vertice Inicial");
         jPanel5.add(jLabel1, java.awt.BorderLayout.WEST);
@@ -101,7 +111,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2.add(jPanel5);
 
         jPanel6.setOpaque(false);
-        jPanel6.setLayout(new java.awt.BorderLayout());
+        jPanel6.setLayout(new java.awt.BorderLayout(10, 0));
 
         jTextField2.setText("8");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -215,27 +225,13 @@ public class MainWindow extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+       
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            javax.swing.UIManager.setLookAndFeel(new WebLookAndFeel());
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
+                    
         //</editor-fold>
         //</editor-fold>
 
