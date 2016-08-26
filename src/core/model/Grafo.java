@@ -91,6 +91,11 @@ public class Grafo {
         return eu;
     }
     
+    public void resetVisiteds(){
+        for (Vertice vertice : vertices) {
+            vertice.setVisitado(false);
+        }
+    }
     
 }
 

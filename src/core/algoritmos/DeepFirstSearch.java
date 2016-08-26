@@ -14,11 +14,12 @@ import java.util.Stack;
  *
  * @author lite
  */
-public class DeepFirstSearch {
+public class DeepFirstSearch implements SearchAlgorithm{
     
     
     
-    public static Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
+    @Override
+    public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
         Vertice verticeInicial = grafo.getVertice(idVerticeInicial);
         verticeInicial.setVisitado(true);
         for(Vertice n: grafo.getVizinhos(verticeInicial))
@@ -28,10 +29,9 @@ public class DeepFirstSearch {
             {
                 n.setAnterior(verticeInicial);
                 if(n.getId() == idVerticeProcurado){
-                    System.out.println("achooo");
                     return n;
                 }
-                Vertice son = DeepFirstSearch.search(grafo, n.getId(), idVerticeProcurado);
+                Vertice son = search(grafo, n.getId(), idVerticeProcurado);
                 if(son != null){
                     return son;
                 }

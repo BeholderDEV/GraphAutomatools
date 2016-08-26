@@ -7,18 +7,17 @@ package core.algoritmos;
 
 import core.model.Grafo;
 import core.model.Vertice;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /**
  *
  * @author Adson Estevesa
  */
-public class BreadthFirstSearch {
+public class BreadthFirstSearch implements SearchAlgorithm{
     
-    public static Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
+    @Override
+    public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
         
         if(idVerticeInicial == idVerticeProcurado)
         {
@@ -46,21 +45,6 @@ public class BreadthFirstSearch {
                 }
             }
         }
-        
         return null;
-    }
-
-    private static List<Vertice> removeVisited(List<Vertice> proximosVizinhos, Vertice primeiro) {
-        List<Vertice> naovisitados = new ArrayList<>();
-        
-        for(Vertice vizinho : proximosVizinhos)
-        {
-            if(!vizinho.isVisitado())
-            {
-                vizinho.setAnterior(primeiro);
-                naovisitados.add(vizinho);
-            }
-        }
-        return naovisitados;
     }
 }

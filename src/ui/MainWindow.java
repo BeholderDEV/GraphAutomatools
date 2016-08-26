@@ -7,18 +7,18 @@ package ui;
 
 import core.algoritmos.BreadthFirstSearch;
 import core.algoritmos.DeepFirstSearch;
+import core.algoritmos.SearchAlgorithm;
 import core.model.Grafo;
 import core.model.Vertice;
+import core.util.VerticeUtils;
 import core.web.LeitorXml;
-import java.util.Queue;
-import java.util.Stack;
 
 /**
  *
  * @author lite
  */
 public class MainWindow extends javax.swing.JFrame {
-
+    private Grafo grafo;
     /**
      * Creates new form MainWIndow
      */
@@ -127,29 +127,20 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Grafo grafo = LeitorXml.grafoFromXML();
+        grafo = LeitorXml.grafoFromXML();
         jTextArea1.setText(grafo.toString());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Vertice vertice = DeepFirstSearch.search(LeitorXml.grafoFromXML(), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
-        String resposta = "";
-        if(vertice==null)
-        {
-           resposta = "Vertice não encontrado";
+        if(grafo!=null){
+            grafo.resetVisiteds();
+            SearchAlgorithm sa = new DeepFirstSearch();
+            Vertice vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
-        else
-        {
-           resposta = "Vertice encontrado \n caminho: \n";
-           while(vertice.getAnterior()!=null)
-           {
-               resposta = resposta.concat(vertice.getRotulo() + " - ");
-               vertice = vertice.getAnterior();
-           }
-           resposta = resposta.concat(vertice.getRotulo());
+        else{
+            jTextArea1.setText("Carregue um Grafo");
         }
-        
-        jTextArea1.setText(resposta);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -161,24 +152,15 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Vertice vertice = BreadthFirstSearch.search(LeitorXml.grafoFromXML(), Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
-        String resposta = "";
-        if(vertice==null)
-        {
-           resposta = "Vertice não encontrado";
+        if(grafo!=null){
+            grafo.resetVisiteds();
+            SearchAlgorithm sa = new BreadthFirstSearch();
+            Vertice vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
-        else
-        {
-           resposta = "Vertice encontrado \n caminho: \n";
-           while(vertice.getAnterior()!=null)
-           {
-               resposta = resposta.concat(vertice.getRotulo() + " - ");
-               vertice = vertice.getAnterior();
-           }
-           resposta = resposta.concat(vertice.getRotulo());
+        else{
+            jTextArea1.setText("Carregue um Grafo");
         }
-        
-        jTextArea1.setText(resposta);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
