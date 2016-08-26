@@ -23,6 +23,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Locale;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import ui.utils.ColorController;
 
 /**
@@ -61,6 +62,7 @@ public class WeblafUtils {
        }
        ((WebTextFieldUI) field.getUI()).setDrawBorder(false);
        ((WebTextFieldUI) field.getUI()).setDrawBackground(true);
+       field.setBorder(new EmptyBorder(15,15,15,15));
        field.setOpaque(true);
        field.setBackground(ColorController.COR_DESTAQUE);
        field.setForeground(ColorController.COR_LETRA);

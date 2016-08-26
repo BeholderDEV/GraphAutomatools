@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/model/Fork.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/web/XMLReader.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/algoritmos/SearchAlgorithm.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/algoritmos/BreadthFirstSearch.java</file>
             <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/ui/MainWindow.java</file>
             <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/algoritmos/DeepFirstSearch.java</file>
             <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/util/VerticeUtils.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/algoritmos/BreadthFirstSearch.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/algoritmos/SearchAlgorithm.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/ui/graph/GraphDrawer.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/model/Graph.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/GraphAutomatools/src/core/web/XMLReader.java</file>
         </group>
     </open-files>
 </project-private>
