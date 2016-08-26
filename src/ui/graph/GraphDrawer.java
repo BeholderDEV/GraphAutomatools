@@ -15,6 +15,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import ui.utils.ColorController;
 
@@ -42,23 +44,31 @@ public class GraphDrawer {
         
         gd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gd.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        gd.setStroke(new BasicStroke(3));
+        
+        float dash1[] = {7.0f};
+        
+        
         for (Aresta edge: graph.getArestas()) {
             if(edge.isHinted()){
 //                gd.setColor(new Color(69,189,255));
+                gd.setStroke(new BasicStroke(3.0f));
                 gd.setColor(new Color(0,239,192));
             }
             else{
+                gd.setStroke(new BasicStroke(3.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f));
                 gd.setColor(ColorController.COR_LETRA);
             }
             gd.drawLine(edge.getVertice1().getPosition().x, edge.getVertice1().getPosition().y, edge.getVertice2().getPosition().x, edge.getVertice2().getPosition().y);
         }
+        gd.setStroke(new BasicStroke(3.0f));
+        
         for (Vertice fork: graph.getVertices()) {
             gd.setColor(new Color(69,189,255));
-//            gd.setColor(new Color(0,239,192));
             gd.fillOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
-            gd.setColor(ColorController.FUNDO_ESCURO);
-                
+            gd.setColor(ColorController.COR_LETRA);
+            gd.drawOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
+
+            gd.setColor(ColorController.FUNDO_MEDIO);
             width = gd.getFontMetrics().stringWidth(fork.getRotulo());
             height = gd.getFontMetrics().getHeight()-gd.getFontMetrics().getDescent();
             gd.drawString(fork.getRotulo(),fork.getPosition().x-(width/2), fork.getPosition().y+(height/2));
