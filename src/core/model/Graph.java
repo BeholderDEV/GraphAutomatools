@@ -40,6 +40,14 @@ public class Graph {
         }
         return null;
     }
+
+    public List<Fork> getVertices() {
+        return vertices;
+    }
+
+    public List<Edge> getArestas() {
+        return arestas;
+    }
     
     public void addAresta(Edge aresta){
         arestas.add(aresta);

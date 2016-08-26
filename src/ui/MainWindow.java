@@ -12,6 +12,9 @@ import core.model.Graph;
 import core.model.Fork;
 import core.util.VerticeUtils;
 import core.web.XMLReader;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import ui.graph.GraphDrawer;
 
 /**
  *
@@ -35,33 +38,20 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        graphLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Ver Grafo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jButton2.setText("Deep First");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         jTextField1.setText("0");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +59,7 @@ public class MainWindow extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jPanel2.add(jTextField1);
 
         jTextField2.setText("8");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +67,9 @@ public class MainWindow extends javax.swing.JFrame {
                 jTextField2ActionPerformed(evt);
             }
         });
+        jPanel2.add(jTextField2);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
 
         jButton3.setText("Breadth First");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -83,52 +77,44 @@ public class MainWindow extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton3);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap())
-        );
+        jButton2.setText("Deep First");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton2);
+
+        jButton1.setText("Ver Grafo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1);
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.SOUTH);
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        graphLabel.setPreferredSize(new java.awt.Dimension(800, 600));
+        jPanel4.add(graphLabel, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         grafo = XMLReader.grafoFromXML();
-        jTextArea1.setText(grafo.toString());
+        GraphDrawer drawer = new GraphDrawer(grafo);
+        Image image = drawer.drawGraph();
+        graphLabel.setIcon(new ImageIcon(image));
+//        jTextArea1.setText(grafo.toString());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -136,10 +122,10 @@ public class MainWindow extends javax.swing.JFrame {
             grafo.resetVisiteds();
             SearchAlgorithm sa = new DeepFirstSearch();
             Fork vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
-            jTextArea1.setText(VerticeUtils.getPath(vertice));
+//            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{
-            jTextArea1.setText("Carregue um Grafo");
+//            jTextArea1.setText("Carregue um Grafo");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -156,10 +142,10 @@ public class MainWindow extends javax.swing.JFrame {
             grafo.resetVisiteds();
             SearchAlgorithm sa = new BreadthFirstSearch();
             Fork vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
-            jTextArea1.setText(VerticeUtils.getPath(vertice));
+//            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{
-            jTextArea1.setText("Carregue um Grafo");
+//            jTextArea1.setText("Carregue um Grafo");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -200,11 +186,14 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel graphLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
