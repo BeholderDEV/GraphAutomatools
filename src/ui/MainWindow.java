@@ -61,6 +61,25 @@ public class MainWindow extends javax.swing.JFrame {
 //        jPanel4.invalidate();
         jPanel4.revalidate();
     }
+    
+    private int getIDVerticeInicial(){
+        String rotulo = jTextField1.getText();
+        for (Vertice vertice: grafo.getVertices()) {
+            if(vertice.getRotulo().equalsIgnoreCase(rotulo)){
+                return vertice.getId();
+            }
+        }
+        return -1;
+    }
+    private int getIDVerticeFinal(){
+        String rotulo = jTextField2.getText();
+        for (Vertice vertice: grafo.getVertices()) {
+            if(vertice.getRotulo().equalsIgnoreCase(rotulo)){
+                return vertice.getId();
+            }
+        }
+        return -1;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,7 +119,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel1.setText("Vertice Inicial");
         jPanel5.add(jLabel1, java.awt.BorderLayout.WEST);
 
-        jTextField1.setText("0");
+        jTextField1.setText("A");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -113,7 +132,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel6.setOpaque(false);
         jPanel6.setLayout(new java.awt.BorderLayout(10, 0));
 
-        jTextField2.setText("8");
+        jTextField2.setText("D");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -184,7 +203,7 @@ public class MainWindow extends javax.swing.JFrame {
         if(grafo!=null){
             grafo.resetVisitedsandHinteds();
             SearchAlgorithm sa = new DeepFirstSearch();
-            Vertice vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
             Aresta aresta;
             while(vertice.getAnterior()!=null)
             {
@@ -205,7 +224,7 @@ public class MainWindow extends javax.swing.JFrame {
         if(grafo!=null){
             grafo.resetVisitedsandHinteds();
             SearchAlgorithm sa = new BreadthFirstSearch();
-            Vertice vertice = sa.search(grafo, Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+            Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
             Aresta aresta;
             while(vertice.getAnterior()!=null)
             {
