@@ -18,7 +18,7 @@ public class Grafo {
     List<Vertice> vertices;
     List<Aresta> arestas;
     Boolean ponderado = false;
-    Boolean direcionado = false;
+    Boolean dirigido = false;
 
     public Grafo() {
         vertices = new ArrayList<>();
@@ -59,12 +59,12 @@ public class Grafo {
         this.ponderado = ponderado;
     }
 
-    public Boolean getDirecionado() {
-        return direcionado;
+    public Boolean getDirigido() {
+        return dirigido;
     }
 
-    public void setDirecionado(Boolean direcionado) {
-        this.direcionado = direcionado;
+    public void setDirigido(Boolean dirigido) {
+        this.dirigido = dirigido;
     }
     
     public void addAresta(Aresta aresta){
@@ -73,7 +73,7 @@ public class Grafo {
     
     public Aresta getAresta(int idV1,int idV2){
         
-        if(direcionado){
+        if(dirigido){
             for (Aresta aresta: arestas) {
                if(aresta.getVertice1().getId()==idV1 && aresta.getVertice2().getId()==idV2){
                    return aresta;
@@ -94,7 +94,7 @@ public class Grafo {
     public List<Vertice> getVizinhos(Vertice vertice){
         List<Vertice> vizinhos = new ArrayList<>();
         for (Aresta aresta: arestas) {
-            if(!direcionado){
+            if(!dirigido){
                 if(aresta.getVertice2()==vertice){
                     vizinhos.add(aresta.getVertice1());
                 }

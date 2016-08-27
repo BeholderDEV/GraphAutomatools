@@ -56,7 +56,7 @@ public class XMLReader {
                 Node node = nodes.item(0);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                      Element element = (Element) node;
-                     grafo.setDirecionado(Boolean.parseBoolean(element.getAttribute("dirigido")));
+                     grafo.setDirigido(Boolean.parseBoolean(element.getAttribute("dirigido")));
                      grafo.setPonderado(Boolean.parseBoolean(element.getAttribute("ponderado")));
                 }
                 nodes = doc.getElementsByTagName("Vertice");
