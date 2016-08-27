@@ -14,9 +14,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import ui.utils.ColorController;
 
@@ -29,9 +29,12 @@ public class GraphDrawer {
     private int nodeSize = 35;
     private int width;
     private  int height;
-    
+    double phi;
+    int barb;
     public GraphDrawer(Grafo graph) {
         this.graph = graph;
+        phi = Math.toRadians(15);
+        barb = 20;
     }
     
     
@@ -44,23 +47,20 @@ public class GraphDrawer {
         
         gd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gd.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        
-        float dash1[] = {7.0f};
-        
-        
+
+        gd.setStroke(new BasicStroke(3.0f));
         for (Aresta edge: graph.getArestas()) {
             if(edge.isHinted()){
-//                gd.setColor(new Color(69,189,255));
-                gd.setStroke(new BasicStroke(3.0f));
                 gd.setColor(new Color(0,239,192));
             }
             else{
-                gd.setStroke(new BasicStroke(3.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f));
                 gd.setColor(ColorController.COR_LETRA);
             }
-            gd.drawLine(edge.getVertice1().getPosition().x, edge.getVertice1().getPosition().y, edge.getVertice2().getPosition().x, edge.getVertice2().getPosition().y);
+            Point sw = edge.getVertice1().getPosition();
+            Point ne = edge.getVertice2().getPosition();
+            gd.drawLine(sw.x, sw.y, ne.x, ne.y);
+            drawArrowHead(gd, ne, sw);
         }
-        gd.setStroke(new BasicStroke(3.0f));
         
         for (Vertice fork: graph.getVertices()) {
             gd.setColor(new Color(69,189,255));
@@ -72,7 +72,6 @@ public class GraphDrawer {
             width = gd.getFontMetrics().stringWidth(fork.getRotulo());
             height = gd.getFontMetrics().getHeight()-gd.getFontMetrics().getDescent();
             gd.drawString(fork.getRotulo(),fork.getPosition().x-(width/2), fork.getPosition().y+(height/2));
-            
             
         }
         
@@ -86,6 +85,25 @@ public class GraphDrawer {
         return  bufferedImage;
     }
     
+    private void drawArrowHead(Graphics2D g2, Point tip, Point tail)
+    {
+        double dy = tip.y - tail.y;
+        double dx = tip.x - tail.x;
+        double theta = Math.atan2(dy, dx);
+        //System.out.println("theta = " + Math.toDegrees(theta));
+        double x, y, rho = theta + phi;
+        
+        double iniX = tip.x - (nodeSize/2) * Math.cos(theta);
+        double iniY = tip.y - (nodeSize/2) * Math.sin(theta);
+        
+        for(int j = 0; j < 2; j++)
+        {
+            x = iniX - barb * Math.cos(rho);
+            y = iniY - barb * Math.sin(rho);
+            g2.draw(new Line2D.Double(iniX, iniY, x, y));
+            rho = theta - phi;
+        }
+    }
     private Point getGraphMinPoint(){
         Point point = new Point();
         point.x = graph.getVertices().get(0).getPosition().x;
