@@ -51,8 +51,15 @@ public class XMLReader {
             try {
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                 Document doc = dBuilder.parse(file);
-                doc.getDocumentElement().normalize();
-                NodeList nodes = doc.getElementsByTagName("Vertice");
+                doc.getDocumentElement().normalize();                
+                NodeList nodes = doc.getElementsByTagName("Grafo");
+                Node node = nodes.item(0);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                     Element element = (Element) node;
+                     grafo.setDirecionado(Boolean.parseBoolean(element.getAttribute("dirigido")));
+                     grafo.setPonderado(Boolean.parseBoolean(element.getAttribute("ponderado")));
+                }
+                nodes = doc.getElementsByTagName("Vertice");
                 if (nodes.getLength() == 0) {
                     System.out.println("Você não está importando o xml correto. \n"
                             + "O xml esperado é aquele gerado a partir do botão 'Scripts' (na janela principal do programa). \n"
@@ -62,7 +69,7 @@ public class XMLReader {
                             + "3) Clique no botão 'Exportar'");
                 } else {
                     for (int i = 0; i < nodes.getLength(); i++) {
-                        Node node = nodes.item(i);
+                        node = nodes.item(i);
                         if (node.getNodeType() == Node.ELEMENT_NODE) {
                             Element element = (Element) node;
                             int relId = Integer.parseInt(element.getAttribute("relId"));
@@ -74,7 +81,7 @@ public class XMLReader {
                     }
                     nodes = doc.getElementsByTagName("Aresta");
                     for (int i = 0; i < nodes.getLength(); i++) {
-                        Node node = nodes.item(i);
+                        node = nodes.item(i);
                         if (node.getNodeType() == Node.ELEMENT_NODE) {
                             Element element = (Element) node;
                             int idVertice1 = Integer.parseInt(element.getAttribute("idVertice1"));

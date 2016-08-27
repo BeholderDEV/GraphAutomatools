@@ -17,6 +17,8 @@ import java.util.List;
 public class Grafo {
     List<Vertice> vertices;
     List<Aresta> arestas;
+    Boolean ponderado = false;
+    Boolean direcionado = false;
 
     public Grafo() {
         vertices = new ArrayList<>();
@@ -48,28 +50,57 @@ public class Grafo {
     public List<Aresta> getArestas() {
         return arestas;
     }
+
+    public Boolean getPonderado() {
+        return ponderado;
+    }
+
+    public void setPonderado(Boolean ponderado) {
+        this.ponderado = ponderado;
+    }
+
+    public Boolean getDirecionado() {
+        return direcionado;
+    }
+
+    public void setDirecionado(Boolean direcionado) {
+        this.direcionado = direcionado;
+    }
     
     public void addAresta(Aresta aresta){
         arestas.add(aresta);
     }
     
     public Aresta getAresta(int idV1,int idV2){
-        for (Aresta aresta: arestas) {
-            if(aresta.getVertice1().getId()==idV1 && aresta.getVertice2().getId()==idV2 || aresta.getVertice1().getId()==idV2 && aresta.getVertice2().getId()==idV1){
-                return aresta;
-            }
+        
+        if(direcionado){
+            for (Aresta aresta: arestas) {
+               if(aresta.getVertice1().getId()==idV1 && aresta.getVertice2().getId()==idV2){
+                   return aresta;
+               }
+            }   
         }
+        else{
+            for (Aresta aresta: arestas) {
+                if(aresta.getVertice1().getId()==idV1 && aresta.getVertice2().getId()==idV2 || aresta.getVertice1().getId()==idV2 && aresta.getVertice2().getId()==idV1){
+                    return aresta;
+                }
+            }
+        }       
+        
         return null;
     }
     
     public List<Vertice> getVizinhos(Vertice vertice){
         List<Vertice> vizinhos = new ArrayList<>();
         for (Aresta aresta: arestas) {
+            if(!direcionado){
+                if(aresta.getVertice2()==vertice){
+                    vizinhos.add(aresta.getVertice1());
+                }
+            }            
             if(aresta.getVertice1()==vertice){
                 vizinhos.add(aresta.getVertice2());
-            }
-            if(aresta.getVertice2()==vertice){
-                vizinhos.add(aresta.getVertice1());
             }
         }
         Collections.sort(vizinhos, new OrdenaPorRotulo());

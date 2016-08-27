@@ -188,7 +188,7 @@ public class MainWindow extends javax.swing.JFrame {
             Aresta aresta;
             while(vertice.getAnterior()!=null)
             {
-                aresta = grafo.getAresta(vertice.getId(), vertice.getAnterior().getId());
+                aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
                 aresta.setHinted(true);
                 vertice = vertice.getAnterior();
             }
@@ -209,7 +209,7 @@ public class MainWindow extends javax.swing.JFrame {
             Aresta aresta;
             while(vertice.getAnterior()!=null)
             {
-                aresta = grafo.getAresta(vertice.getId(), vertice.getAnterior().getId());
+                aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
                 aresta.setHinted(true);
                 vertice = vertice.getAnterior();
             }
