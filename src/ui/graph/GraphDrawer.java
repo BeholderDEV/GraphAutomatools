@@ -27,14 +27,12 @@ import ui.utils.ColorController;
 public class GraphDrawer {
     private Grafo graph;
     private int nodeSize = 35;
-    private int width;
-    private  int height;
-    double phi;
-    int barb;
+    private int fontWidth;
+    private int fontHeight;
+    private double phi = Math.toRadians(15);
+    private int barb= 20;
     public GraphDrawer(Grafo graph) {
         this.graph = graph;
-        phi = Math.toRadians(15);
-        barb = 20;
     }
     
     
@@ -69,10 +67,9 @@ public class GraphDrawer {
             gd.drawOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
 
             gd.setColor(ColorController.FUNDO_MEDIO);
-            width = gd.getFontMetrics().stringWidth(fork.getRotulo());
-            height = gd.getFontMetrics().getHeight()-gd.getFontMetrics().getDescent();
-            gd.drawString(fork.getRotulo(),fork.getPosition().x-(width/2), fork.getPosition().y+(height/2));
-            
+            fontWidth = gd.getFontMetrics().stringWidth(fork.getRotulo());
+            fontHeight = gd.getFontMetrics().getHeight()-gd.getFontMetrics().getDescent();
+            gd.drawString(fork.getRotulo(),fork.getPosition().x-(fontWidth/2), fork.getPosition().y+(fontHeight/2));
         }
         
         if(minSize.x<0){
