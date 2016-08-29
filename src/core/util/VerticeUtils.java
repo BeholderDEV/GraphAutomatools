@@ -16,6 +16,15 @@ import java.util.List;
  * @author lite
  */
 public class VerticeUtils {
+    
+    public static String verticeListToString(List<Vertice> vertices){
+        String out = "";
+        for (Vertice vertice : vertices) {
+            out = out.concat(vertice.getRotulo()+" - ");
+        }
+        return out;
+    }
+    
     public static List<Vertice> getVerticesPath(Vertice vertice){
         List<Vertice> vertices = new ArrayList<>();
         while(vertice.getAnterior()!=null)

@@ -6,6 +6,8 @@ import com.alee.laf.button.WebButton;
 import com.alee.laf.button.WebButtonUI;
 import com.alee.laf.button.WebToggleButton;
 import com.alee.laf.checkbox.WebCheckBoxUI;
+import com.alee.laf.combobox.WebComboBox;
+import com.alee.laf.combobox.WebComboBoxUI;
 import com.alee.laf.panel.WebPanelUI;
 import com.alee.laf.scroll.WebScrollBarUI;
 import com.alee.laf.scroll.WebScrollPaneUI;
@@ -24,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.util.Locale;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ComboBoxUI;
 import ui.utils.ColorController;
 
 /**
@@ -56,6 +59,21 @@ public class WeblafUtils {
         }
     }
     
+    public static void configuraWebLaf(WebComboBox field) {
+       if (!WeblafUtils.weblafEstaInstalado()) {
+           return;
+       }
+       ((WebComboBoxUI) field.getUI()).setDrawBorder(false);
+       ((WebComboBoxUI) field.getUI()).setRound(0);
+       ((WebComboBoxUI) field.getUI()).setExpandedBgColor(ColorController.COR_DESTAQUE);
+       ((WebComboBoxUI) field.getUI()).setWebColoredBackground(false);
+//       ((WebComboBoxUI) field.getUI()).s 
+       
+//       field.setBorder(new EmptyBorder(15,15,15,15));
+//       field.setOpaque(true);
+//       field.setBackground(ColorController.COR_DESTAQUE);
+//       field.setForeground(ColorController.FUNDO_ESCURO);
+    }
     public static void configuraWebLaf(JTextField field) {
        if (!WeblafUtils.weblafEstaInstalado()) {
            return;

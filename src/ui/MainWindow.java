@@ -11,16 +11,15 @@ import com.alee.laf.WebLookAndFeel;
 import core.algoritmos.BreadthFirstSearch;
 import core.algoritmos.DeepFirstSearch;
 import core.algoritmos.SearchAlgorithm;
+import core.algoritmos.SearchAlgorithmFactory;
 import core.model.Aresta;
 import core.model.Grafo;
 import core.model.Vertice;
 import core.util.VerticeUtils;
 import core.web.XMLReader;
 import java.awt.Image;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.UnsupportedLookAndFeelException;
 import ui.graph.GraphDrawer;
 import ui.utils.ColorController;
@@ -45,9 +44,9 @@ public class MainWindow extends javax.swing.JFrame {
         WeblafUtils.instalaWeblaf();
         WeblafUtils.configuraWebLaf(jTextField1);
         WeblafUtils.configuraWebLaf(jTextField2);
+        WeblafUtils.configuraWebLaf(searchMethodChooser);
         WeblafUtils.configurarBotao(webButton1);
-        WeblafUtils.configurarBotao(webButton2);
-        WeblafUtils.configurarBotao(webButton3);
+        WeblafUtils.configurarBotao(webButton4);
         jPanel1.setBackground(ColorController.COR_PRINCIPAL);
         jLabel1.setForeground(ColorController.COR_LETRA);
         jLabel2.setForeground(ColorController.COR_LETRA);
@@ -80,6 +79,20 @@ public class MainWindow extends javax.swing.JFrame {
         }
         return -1;
     }
+    
+    private int getSearchMethod(){
+        String method = searchMethodChooser.getSelectedItem().toString();
+        if(method.equals("Deep First")){
+            return SearchAlgorithmFactory.DEEP_FIRST_SEARCH;
+        }
+        else if(method.equals("Breadth First")){
+            return SearchAlgorithmFactory.BREADTH_FIRST_SEARCH;
+        }
+        return -1;
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,8 +111,8 @@ public class MainWindow extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        webButton3 = new com.alee.laf.button.WebButton();
-        webButton2 = new com.alee.laf.button.WebButton();
+        searchMethodChooser = new com.alee.laf.combobox.WebComboBox();
+        webButton4 = new com.alee.laf.button.WebButton();
         webButton1 = new com.alee.laf.button.WebButton();
         jPanel4 = new javax.swing.JPanel();
 
@@ -150,21 +163,16 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        webButton3.setText("Breadth First");
-        webButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(webButton3);
+        searchMethodChooser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Deep First", "Breadth First" }));
+        jPanel3.add(searchMethodChooser);
 
-        webButton2.setText("Deep First");
-        webButton2.addActionListener(new java.awt.event.ActionListener() {
+        webButton4.setText("Buscar");
+        webButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton2ActionPerformed(evt);
+                webButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(webButton2);
+        jPanel3.add(webButton4);
 
         webButton1.setText("Carregar");
         webButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -199,12 +207,14 @@ public class MainWindow extends javax.swing.JFrame {
         drawGraph();
     }//GEN-LAST:event_webButton1ActionPerformed
 
-    private void webButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton2ActionPerformed
+    private void webButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton4ActionPerformed
         if(grafo!=null){
             grafo.resetVisitedsandHinteds();
-            SearchAlgorithm sa = new DeepFirstSearch();
+            SearchAlgorithm sa = SearchAlgorithmFactory.build(getSearchMethod());
             Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
             Aresta aresta;
+            String path = VerticeUtils.getPath(vertice);
+            System.out.println(path);
             while(vertice.getAnterior()!=null)
             {
                 aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
@@ -213,32 +223,11 @@ public class MainWindow extends javax.swing.JFrame {
             }
             drawGraph();
             
-//            jTextArea1.setText(VerticeUtils.getPath(vertice));
         }
         else{
 //            jTextArea1.setText("Carregue um Grafo");
         }
-    }//GEN-LAST:event_webButton2ActionPerformed
-
-    private void webButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton3ActionPerformed
-        if(grafo!=null){
-            grafo.resetVisitedsandHinteds();
-            SearchAlgorithm sa = new BreadthFirstSearch();
-            Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
-            Aresta aresta;
-            while(vertice.getAnterior()!=null)
-            {
-                aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
-                aresta.setHinted(true);
-                vertice = vertice.getAnterior();
-            }
-            drawGraph();
-//            jTextArea1.setText(VerticeUtils.getPath(vertice));
-        }
-        else{
-//            jTextArea1.setText("Carregue um Grafo");
-        }
-    }//GEN-LAST:event_webButton3ActionPerformed
+    }//GEN-LAST:event_webButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,8 +262,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private com.alee.laf.combobox.WebComboBox searchMethodChooser;
     private com.alee.laf.button.WebButton webButton1;
-    private com.alee.laf.button.WebButton webButton2;
-    private com.alee.laf.button.WebButton webButton3;
+    private com.alee.laf.button.WebButton webButton4;
     // End of variables declaration//GEN-END:variables
 }
