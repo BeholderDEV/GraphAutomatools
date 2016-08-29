@@ -213,8 +213,8 @@ public class MainWindow extends javax.swing.JFrame {
             SearchAlgorithm sa = SearchAlgorithmFactory.build(getSearchMethod());
             Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
             Aresta aresta;
-            String path = VerticeUtils.getPath(vertice);
-            System.out.println(path);
+//            String path = VerticeUtils.getPath(vertice);
+//            System.out.println(path);
             while(vertice.getAnterior()!=null)
             {
                 aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
@@ -225,7 +225,6 @@ public class MainWindow extends javax.swing.JFrame {
             
         }
         else{
-//            jTextArea1.setText("Carregue um Grafo");
         }
     }//GEN-LAST:event_webButton4ActionPerformed
 
