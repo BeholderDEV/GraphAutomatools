@@ -47,7 +47,7 @@ public class VerticeUtils {
         }
         else
         {
-           resposta = "Vertice encontrado \n caminho: \n";
+           resposta = "Vertice encontrado \nCaminho: \n";
            vertices = VerticeUtils.getVerticesPath(vertice);
             for (Vertice vertice1 : vertices) {
                 path = path.concat(vertice1.getRotulo()+" - ");

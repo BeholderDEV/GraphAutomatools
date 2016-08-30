@@ -42,8 +42,10 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void configura(){
         WeblafUtils.instalaWeblaf();
+        WeblafUtils.configuraWebLaf(jScrollPane1);
         WeblafUtils.configuraWebLaf(jTextField1);
         WeblafUtils.configuraWebLaf(jTextField2);
+        WeblafUtils.configuraWebLaf(jTextArea1);
         WeblafUtils.configuraWebLaf(searchMethodChooser);
         WeblafUtils.configurarBotao(webButton1);
         WeblafUtils.configurarBotao(webButton4);
@@ -114,7 +116,10 @@ public class MainWindow extends javax.swing.JFrame {
         searchMethodChooser = new com.alee.laf.combobox.WebComboBox();
         webButton4 = new com.alee.laf.button.WebButton();
         webButton1 = new com.alee.laf.button.WebButton();
+        jPanel7 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,9 +189,20 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.SOUTH);
 
+        jPanel7.setOpaque(false);
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
         jPanel4.setOpaque(false);
         jPanel4.setLayout(new java.awt.BorderLayout());
-        jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
+        jPanel7.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel7.add(jScrollPane1, java.awt.BorderLayout.PAGE_END);
+
+        jPanel1.add(jPanel7, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -213,16 +229,18 @@ public class MainWindow extends javax.swing.JFrame {
             SearchAlgorithm sa = SearchAlgorithmFactory.build(getSearchMethod());
             Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
             Aresta aresta;
-//            String path = VerticeUtils.getPath(vertice);
+            String path = VerticeUtils.getPath(vertice);
+            jTextArea1.setText(path);
 //            System.out.println(path);
-            while(vertice.getAnterior()!=null)
-            {
-                aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
-                aresta.setHinted(true);
-                vertice = vertice.getAnterior();
+            if(vertice!=null){
+                while(vertice.getAnterior()!=null)
+                {
+                    aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
+                    aresta.setHinted(true);
+                    vertice = vertice.getAnterior();
+                }
             }
             drawGraph();
-            
         }
         else{
         }
@@ -259,6 +277,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private com.alee.laf.combobox.WebComboBox searchMethodChooser;
