@@ -138,6 +138,16 @@ public class Grafo {
             aresta.setHinted(false);
         }
     }
+
+    public boolean verificarVisitados() {
+        for(Vertice vertice : vertices){
+            if(!vertice.isVisitado())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     
 }
 

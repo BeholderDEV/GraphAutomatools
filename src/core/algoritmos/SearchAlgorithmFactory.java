@@ -12,12 +12,16 @@ package core.algoritmos;
 public class SearchAlgorithmFactory {
     public static int DEEP_FIRST_SEARCH = 1;
     public static int BREADTH_FIRST_SEARCH = 2;
+    public static int DIJKSTRA_SEARCH = 3;
     public static SearchAlgorithm build(int method){
         if(method == DEEP_FIRST_SEARCH){
             return new DeepFirstSearch();
         }
         if(method == BREADTH_FIRST_SEARCH){
             return new BreadthFirstSearch();
+        }
+        if(method == DIJKSTRA_SEARCH){
+            return new DijkstraSearch();
         }
         return null;
     }

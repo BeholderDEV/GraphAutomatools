@@ -90,6 +90,9 @@ public class MainWindow extends javax.swing.JFrame {
         else if(method.equals("Breadth First")){
             return SearchAlgorithmFactory.BREADTH_FIRST_SEARCH;
         }
+        else if(method.equals("Dijkstra")){
+            return SearchAlgorithmFactory.DIJKSTRA_SEARCH;
+        }
         return -1;
     }
     
@@ -168,7 +171,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        searchMethodChooser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Deep First", "Breadth First" }));
+        searchMethodChooser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Deep First", "Breadth First", "Dijkstra" }));
         jPanel3.add(searchMethodChooser);
 
         webButton4.setText("Buscar");
@@ -230,6 +233,7 @@ public class MainWindow extends javax.swing.JFrame {
             Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
             Aresta aresta;
             String path = VerticeUtils.getPath(vertice);
+            System.out.println("path : "+path);
             jTextArea1.setText(path);
 //            System.out.println(path);
             if(vertice!=null){

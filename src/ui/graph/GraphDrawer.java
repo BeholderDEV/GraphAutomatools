@@ -37,6 +37,9 @@ public class GraphDrawer {
     
     
     public Image drawGraph(){
+        Point minvert = new Point();
+        Point maxvert = new Point();
+        Point centervert = new Point();
         Point maxSize = getGraphMaxPoint();
         Point minSize = getGraphMinPoint();
         BufferedImage bufferedImage = new BufferedImage(maxSize.x, maxSize.y, BufferedImage.TYPE_4BYTE_ABGR);
@@ -45,6 +48,8 @@ public class GraphDrawer {
         
         gd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gd.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        gd.setColor(ColorController.COR_PRINCIPAL);
+        gd.fillRect(0, 0, maxSize.x+100, maxSize.y+100);
 
         gd.setStroke(new BasicStroke(3.0f));
         for (Aresta edge: graph.getArestas()) {
@@ -60,6 +65,31 @@ public class GraphDrawer {
             if(graph.getDirigido())                
             {
                 drawArrowHead(gd, ne, sw);
+            }
+            if(graph.getPonderado()){
+                if(sw.x<ne.x){
+                    minvert.x=sw.x;
+                    maxvert.x=ne.x;
+                }else{
+                    minvert.x=ne.x;
+                    maxvert.x=sw.x;
+                }
+                if(sw.y<ne.y){
+                    minvert.y=sw.y;
+                    maxvert.y=ne.y;
+                }else{
+                    minvert.y=ne.y;
+                    maxvert.y=sw.y;
+                }
+                centervert.x = minvert.x+((maxvert.x-minvert.x)/2);
+                centervert.y = minvert.y+((maxvert.y-minvert.y)/2);
+                
+                fontWidth = gd.getFontMetrics().stringWidth(edge.getPeso().toString());
+                fontHeight = gd.getFontMetrics().getHeight()-gd.getFontMetrics().getDescent();
+                gd.setColor(ColorController.COR_PRINCIPAL);
+                gd.fillRect(centervert.x-13, centervert.y-13, fontWidth+10, fontHeight+10);
+                gd.setColor(ColorController.COR_LETRA);
+                gd.drawString(edge.getPeso().toString(), centervert.x-8, centervert.y+fontHeight-8);
             }
             
         }

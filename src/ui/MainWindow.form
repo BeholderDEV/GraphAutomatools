@@ -148,9 +148,10 @@
             <Component class="com.alee.laf.combobox.WebComboBox" name="searchMethodChooser">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
+                  <StringArray count="3">
                     <StringItem index="0" value="Deep First"/>
                     <StringItem index="1" value="Breadth First"/>
+                    <StringItem index="2" value="Dijkstra"/>
                   </StringArray>
                 </Property>
               </Properties>
