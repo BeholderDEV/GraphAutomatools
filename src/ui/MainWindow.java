@@ -199,6 +199,8 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.BorderLayout());
         jPanel7.add(jPanel4, java.awt.BorderLayout.CENTER);
 
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(166, 125));
+
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -228,12 +230,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void webButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton4ActionPerformed
         if(grafo!=null){
-            grafo.resetVisitedsandHinteds();
+            grafo.resetProperties();
             SearchAlgorithm sa = SearchAlgorithmFactory.build(getSearchMethod());
             Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
             Aresta aresta;
-            String path = VerticeUtils.getPath(vertice);
-            System.out.println("path : "+path);
+            String path = VerticeUtils.getPath(grafo,vertice,getIDVerticeFinal());
             jTextArea1.setText(path);
 //            System.out.println(path);
             if(vertice!=null){

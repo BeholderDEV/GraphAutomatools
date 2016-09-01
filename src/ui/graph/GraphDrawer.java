@@ -87,7 +87,7 @@ public class GraphDrawer {
                 fontWidth = gd.getFontMetrics().stringWidth(edge.getPeso().toString());
                 fontHeight = gd.getFontMetrics().getHeight()-gd.getFontMetrics().getDescent();
                 gd.setColor(ColorController.COR_PRINCIPAL);
-                gd.fillRect(centervert.x-13, centervert.y-13, fontWidth+10, fontHeight+10);
+                gd.fillOval(centervert.x-13, centervert.y-13, fontWidth+10, fontHeight+10);
                 gd.setColor(ColorController.COR_LETRA);
                 gd.drawString(edge.getPeso().toString(), centervert.x-8, centervert.y+fontHeight-8);
             }

@@ -107,6 +107,15 @@ public class Grafo {
         return vizinhos;
     }
     
+    public boolean hasVertice(int id){
+        for (Vertice vertice : vertices) {
+            if(vertice.getId()==id){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public int getArestasCount(){
         return arestas.size();
     }
@@ -130,9 +139,10 @@ public class Grafo {
         return eu;
     }
     
-    public void resetVisitedsandHinteds(){
+    public void resetProperties(){
         for (Vertice vertice : vertices) {
             vertice.setVisitado(false);
+            vertice.setCusto(-1d);
         }
         for (Aresta aresta : arestas) {
             aresta.setHinted(false);

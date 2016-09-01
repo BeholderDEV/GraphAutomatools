@@ -20,6 +20,7 @@ public class DijkstraSearch implements SearchAlgorithm{
     public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado) {
         Queue<Vertice> vertices = new LinkedList<>();
         vertices.add(grafo.getVertice(idVerticeInicial));
+        vertices.peek().setCusto(0.0);
         while(!vertices.isEmpty()){
             Vertice verticeAtual = vertices.poll();
             verticeAtual.setVisitado(true);
@@ -38,7 +39,6 @@ public class DijkstraSearch implements SearchAlgorithm{
                 break;
             }
         }
-        grafo.getVertice(idVerticeInicial).setAnterior(null);
         return grafo.getVertice(idVerticeProcurado);
     }
     

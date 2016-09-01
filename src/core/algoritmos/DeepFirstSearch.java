@@ -7,8 +7,6 @@ package core.algoritmos;
 
 import core.model.Grafo;
 import core.model.Vertice;
-import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  *
