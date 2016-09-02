@@ -26,11 +26,11 @@ public class BreadthFirstSearch implements SearchAlgorithm{
         Queue q = new LinkedList();
         q.add(grafo.getVertice(idVerticeInicial));
         grafo.getVertice(idVerticeInicial).setVisitado(true);
-        
         while(!q.isEmpty())
         {
             Vertice primeiro = (Vertice)q.remove();
             primeiro.setVisitado(true);
+            grafo.addVisitado(primeiro);
             
             for(Vertice vizinho : grafo.getVizinhos(primeiro))
             {
@@ -38,8 +38,10 @@ public class BreadthFirstSearch implements SearchAlgorithm{
                 {
                     vizinho.setAnterior(primeiro);
                     q.add(vizinho);
+                    grafo.addVisitado(vizinho);
                     if(vizinho.getId() == idVerticeProcurado)
                     {
+                        vizinho.setVisitado(true);
                         return vizinho;
                     }
                 }

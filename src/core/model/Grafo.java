@@ -18,11 +18,14 @@ import java.util.List;
  */
 public class Grafo {
     List<Vertice> vertices;
+    List<Vertice> visitados;
     List<Aresta> arestas;
     Boolean ponderado = false;
     Boolean dirigido = false;
+    
 
     public Grafo() {
+        visitados = new ArrayList<>();
         vertices = new ArrayList<>();
         arestas = new ArrayList<>();
     }
@@ -45,6 +48,16 @@ public class Grafo {
         return null;
     }
 
+    public List<Vertice> getVisitados() {
+        return visitados;
+    }
+    
+    public void addVisitado(Vertice v){
+        if(!visitados.contains(v)){
+            visitados.add(v);
+        }
+    }
+    
     public List<Vertice> getVertices() {
         return vertices;
     }
@@ -164,6 +177,7 @@ public class Grafo {
         for (Aresta aresta : arestas) {
             aresta.setHinted(false);
         }
+        visitados = new ArrayList<>();
     }
 
     public boolean verificarVisitados() {
