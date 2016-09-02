@@ -62,11 +62,11 @@ public class GraphDrawer {
             Point sw = edge.getVertice1().getPosition();
             Point ne = edge.getVertice2().getPosition();
             gd.drawLine(sw.x, sw.y, ne.x, ne.y);
-            if(graph.getDirigido())                
+            if(graph.isDirigido())                
             {
                 drawArrowHead(gd, ne, sw);
             }
-            if(graph.getPonderado()){
+            if(graph.isPonderado()){
                 if(sw.x<ne.x){
                     minvert.x=sw.x;
                     maxvert.x=ne.x;

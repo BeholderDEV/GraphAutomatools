@@ -116,6 +116,7 @@ public class MainWindow extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        webButton5 = new com.alee.laf.button.WebButton();
         searchMethodChooser = new com.alee.laf.combobox.WebComboBox();
         webButton4 = new com.alee.laf.button.WebButton();
         webButton1 = new com.alee.laf.button.WebButton();
@@ -170,6 +171,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        webButton5.setText("Conectividade");
+        webButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton5ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(webButton5);
 
         searchMethodChooser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Deep First", "Breadth First", "Dijkstra" }));
         jPanel3.add(searchMethodChooser);
@@ -251,6 +260,17 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_webButton4ActionPerformed
 
+    private void webButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton5ActionPerformed
+        String resposta = "";
+        if(grafo.isDesconexo()){
+            resposta = "Grafo Desconexo";
+        }
+        if(resposta.isEmpty()){
+            resposta = "Grafo Conexo";
+        }
+        jTextArea1.setText(resposta);
+    }//GEN-LAST:event_webButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,5 +310,6 @@ public class MainWindow extends javax.swing.JFrame {
     private com.alee.laf.combobox.WebComboBox searchMethodChooser;
     private com.alee.laf.button.WebButton webButton1;
     private com.alee.laf.button.WebButton webButton4;
+    private com.alee.laf.button.WebButton webButton5;
     // End of variables declaration//GEN-END:variables
 }

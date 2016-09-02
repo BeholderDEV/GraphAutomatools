@@ -41,12 +41,15 @@ public class VerticeUtils {
     public static String getPath(Grafo grafo, Vertice vertice, int idProcurado){
         String resposta = "";
         String path="";
-        List<Vertice> vertices = new ArrayList<>();
+        List<Vertice> vertices = new ArrayList<>();        
         if(vertice==null)
         {
-           resposta = "Vertice não encontrado";
            if(grafo.hasVertice(idProcurado)){
-               resposta = resposta.concat(", porém não há Caminho possível para o Vertice");
+               resposta = resposta.concat("Vertice encontrado, porém não há Caminho possível para o Vertice");
+           }
+           else
+           {
+             resposta =  resposta.concat("Vertice não encontrado");  
            }
         }
         else

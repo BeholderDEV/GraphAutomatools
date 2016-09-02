@@ -145,6 +145,14 @@
             <Property name="alignment" type="int" value="2"/>
           </Layout>
           <SubComponents>
+            <Component class="com.alee.laf.button.WebButton" name="webButton5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Conectividade"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="webButton5ActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="com.alee.laf.combobox.WebComboBox" name="searchMethodChooser">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">

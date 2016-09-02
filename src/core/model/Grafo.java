@@ -5,6 +5,8 @@
  */
 package core.model;
 
+import core.algoritmos.SearchAlgorithm;
+import core.algoritmos.SearchAlgorithmFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,7 +53,7 @@ public class Grafo {
         return arestas;
     }
 
-    public Boolean getPonderado() {
+    public Boolean isPonderado() {
         return ponderado;
     }
 
@@ -59,7 +61,7 @@ public class Grafo {
         this.ponderado = ponderado;
     }
 
-    public Boolean getDirigido() {
+    public Boolean isDirigido() {
         return dirigido;
     }
 
@@ -110,6 +112,21 @@ public class Grafo {
     public boolean hasVertice(int id){
         for (Vertice vertice : vertices) {
             if(vertice.getId()==id){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean isDesconexo()
+    {
+        SearchAlgorithm sa = SearchAlgorithmFactory.build(SearchAlgorithmFactory.BREADTH_FIRST_SEARCH);
+        for(Vertice vertice : vertices)
+        {
+            resetProperties();
+            sa.search(this, vertice.getId(), -1);
+            if(!verificarVisitados())
+            {
                 return true;
             }
         }
