@@ -49,6 +49,7 @@ public class MainWindow extends javax.swing.JFrame {
         WeblafUtils.configuraWebLaf(searchMethodChooser);
         WeblafUtils.configurarBotao(webButton1);
         WeblafUtils.configurarBotao(webButton4);
+        WeblafUtils.configurarBotao(webButton5);
         jPanel1.setBackground(ColorController.COR_PRINCIPAL);
         jLabel1.setForeground(ColorController.COR_LETRA);
         jLabel2.setForeground(ColorController.COR_LETRA);
@@ -126,6 +127,7 @@ public class MainWindow extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -170,7 +172,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
 
         jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel3.setLayout(new java.awt.FlowLayout(2));
 
         webButton5.setText("Conectividade");
         webButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +210,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.BorderLayout());
         jPanel7.add(jPanel4, java.awt.BorderLayout.CENTER);
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(166, 125));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(166, 175));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
