@@ -62,7 +62,7 @@ public class VerticeUtils {
                 }               
             }
             path = path.substring(0, path.length()-3);
-            path = path.concat("\n\nTamanho do Caminho:\n"+vertices.size());
+            path = path.concat("\n\nTamanho do Caminho:\n"+(vertices.size()-1));
             path = path.concat("\nPeso do Caminho:\n"+peso);
             
         }
