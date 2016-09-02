@@ -40,8 +40,8 @@ public class GraphDrawer {
         Point minvert = new Point();
         Point maxvert = new Point();
         Point centervert = new Point();
-        Point maxSize = getGraphMaxPoint();
-        Point minSize = getGraphMinPoint();
+        Point maxSize = getMaxMinPoint(1);
+        Point minSize = getMaxMinPoint(-1);
         BufferedImage bufferedImage = new BufferedImage(maxSize.x, maxSize.y, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics g = bufferedImage.getGraphics();
         Graphics2D gd = (Graphics2D) g;
@@ -106,12 +106,6 @@ public class GraphDrawer {
             gd.drawString(fork.getRotulo(),fork.getPosition().x-(fontWidth/2), fork.getPosition().y+(fontHeight/2));
         }
         
-        if(minSize.x<0){
-            minSize.x=0;
-        }
-        if(minSize.y<0){
-            minSize.y=0;
-        }
         bufferedImage = bufferedImage.getSubimage(minSize.x, minSize.y, maxSize.x-minSize.x, maxSize.y-minSize.y);
         return  bufferedImage;
     }
@@ -135,34 +129,26 @@ public class GraphDrawer {
             rho = theta - phi;
         }
     }
-    private Point getGraphMinPoint(){
+    private Point getMaxMinPoint(int maxMin){
         Point point = new Point();
-        point.x = graph.getVertices().get(0).getPosition().x;
-        point.y = graph.getVertices().get(0).getPosition().y;
-        for (Vertice fork: graph.getVertices()) {
-            if(fork.getPosition().x<point.x){
-                point.x=fork.getPosition().x;
+        point.x = this.graph.getVertice(0).getPosition().x;
+        point.y = this.graph.getVertice(0).getPosition().y;
+        for (Vertice v : this.graph.getVertices()) {
+            if(v.getPosition().x * maxMin > point.x * maxMin){
+                point.x = v.getPosition().x;
             }
-            if(fork.getPosition().y<point.y){
-                point.y=fork.getPosition().y;
+            if(v.getPosition().y * maxMin > point.y * maxMin){
+                point.y = v.getPosition().y;
             }
         }
-        point.x -= 50;
-        point.y -= 50;
-        return point;
-    }
-    private Point getGraphMaxPoint(){
-        Point point = new Point();
-        for (Vertice fork: graph.getVertices()) {
-            if(fork.getPosition().x>point.x){
-                point.x=fork.getPosition().x;
-            }
-            if(fork.getPosition().y>point.y){
-                point.y=fork.getPosition().y;
-            }
+        point.x += 50 * maxMin;
+        point.y += 50 * maxMin;
+        if(point.x < 0){
+            point.x = 0;
         }
-        point.x += 50;
-        point.y += 50;
+        if(point.y < 0){
+            point.y = 0;
+        }
         return point;
     }
 }

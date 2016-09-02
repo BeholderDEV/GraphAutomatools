@@ -53,7 +53,7 @@ public class VerticeUtils {
         {
            resposta = "Vertice encontrado \n\nCaminho: \n";
            vertices = VerticeUtils.getVerticesPath(vertice);
-           int peso = 0;
+           double peso = 0;
             for (Vertice vertice1 : vertices) {
                 path = path.concat(vertice1.getRotulo()+" - ");
                 if(vertice1.getAnterior()!= null && vertice1!= null)
