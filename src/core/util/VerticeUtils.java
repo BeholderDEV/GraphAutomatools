@@ -7,6 +7,11 @@ package core.util;
 
 import core.model.Grafo;
 import core.model.Vertice;
+import de.vandermeer.asciitable.v2.RenderedTable;
+import de.vandermeer.asciitable.v2.V2_AsciiTable;
+import de.vandermeer.asciitable.v2.render.V2_AsciiTableRenderer;
+import de.vandermeer.asciitable.v2.render.WidthAbsoluteEven;
+import de.vandermeer.asciitable.v2.themes.V2_E_TableThemes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,6 +76,51 @@ public class VerticeUtils {
         }
         
         resposta = resposta.concat(path);
+        return resposta;
+    }
+    
+    public static String getTabelaCustos(Grafo grafo)
+    {
+        String resposta = "";
+        String [] colunas = new String[grafo.getVerticesCount()];
+        String [] zero = new String[grafo.getVerticesCount()];
+        String [] um = new String[grafo.getVerticesCount()];
+        String [][] matrizDados =  new String[grafo.getVerticesCount()][2];
+        for (int i = 0; i < grafo.getVerticesCount(); i++) {
+            colunas[i]=grafo.getVertices().get(i).getRotulo();
+            zero[i]=grafo.getVertices().get(i).getCusto().toString();
+            if(grafo.getVertices().get(i).getAnterior()!=null){
+                um[i]=grafo.getVertices().get(i).getAnterior().getRotulo();
+            }else{
+                um[i]="inf";
+            }
+        }
+//        V2_AsciiTable asciiTable = new V2_AsciiTable();
+//        asciiTable.addRule();
+//        asciiTable.addRow(colunas);
+//        asciiTable.addRule();
+//        asciiTable.addRow(zero);
+//        asciiTable.addRule();
+//        asciiTable.addRow(um);
+//        
+//        V2_AsciiTableRenderer rend = new V2_AsciiTableRenderer();
+//        rend.setTheme(V2_E_TableThemes.UTF_LIGHT.get());
+//        rend.setWidth(new WidthAbsoluteEven(76));
+//        
+//        RenderedTable rt = rend.render(asciiTable);
+//        
+//        System.out.println(rt);
+        for (int i=0; i<grafo.getVerticesCount();i++) {
+            System.out.print(colunas[i]+"\t");
+        }
+        System.out.println("");
+        for (int i=0; i<grafo.getVerticesCount();i++) {
+            System.out.print(zero[i]+"\t");
+        }
+        System.out.println("");
+        for (int i=0; i<grafo.getVerticesCount();i++) {
+            System.out.print(um[i]+"\t");
+        }
         return resposta;
     }
 }

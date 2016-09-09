@@ -244,6 +244,7 @@ public class MainWindow extends javax.swing.JFrame {
             Vertice vertice = sa.search(grafo,getIDVerticeInicial(),getIDVerticeFinal());
             Aresta aresta;
             String path = VerticeUtils.getPath(grafo,vertice,getIDVerticeFinal());
+            path=path.concat(VerticeUtils.getTabelaCustos(grafo));
             jTextArea1.setText(path);
 //            System.out.println(path);
             if(vertice!=null){
