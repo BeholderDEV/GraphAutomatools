@@ -20,6 +20,7 @@ public class DeepFirstSearch implements SearchAlgorithm{
     public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
         Vertice verticeInicial = grafo.getVertice(idVerticeInicial);
         verticeInicial.setVisitado(true);
+        grafo.addVisitado(verticeInicial);
         for(Vertice n: grafo.getVizinhos(verticeInicial))
         {
             //if childs state is not visited then recurse
@@ -27,6 +28,8 @@ public class DeepFirstSearch implements SearchAlgorithm{
             {
                 n.setAnterior(verticeInicial);
                 if(n.getId() == idVerticeProcurado){
+                    n.setVisitado(true);
+                    grafo.addVisitado(n);
                     return n;
                 }
                 Vertice son = search(grafo, n.getId(), idVerticeProcurado);

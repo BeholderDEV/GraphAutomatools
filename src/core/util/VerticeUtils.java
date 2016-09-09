@@ -69,6 +69,13 @@ public class VerticeUtils {
                     peso += grafo.getAresta(vertice1.getAnterior().getId(),vertice1.getId()).getPeso();
                 }               
             }
+            
+            path = path.substring(0, path.length()-3);
+            
+            path = path.concat("\n\nPesquisa:\n");
+            for (Vertice vertice1 : grafo.getVisitados()) {
+                path = path.concat(vertice1.getRotulo()+" - ");
+            }
             path = path.substring(0, path.length()-3);
             path = path.concat("\n\nTamanho do Caminho:\n"+(vertices.size()-1));
             path = path.concat("\nPeso do Caminho:\n"+peso);
