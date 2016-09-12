@@ -5,6 +5,7 @@
  */
 package core.util;
 
+import com.bethecoder.ascii_table.ASCIITable;
 import core.model.Grafo;
 import core.model.Vertice;
 import de.vandermeer.asciitable.v2.RenderedTable;
@@ -88,46 +89,21 @@ public class VerticeUtils {
     
     public static String getTabelaCustos(Grafo grafo)
     {
-        String resposta = "";
-        String [] colunas = new String[grafo.getVerticesCount()];
-        String [] zero = new String[grafo.getVerticesCount()];
-        String [] um = new String[grafo.getVerticesCount()];
-        String [][] matrizDados =  new String[grafo.getVerticesCount()][2];
+        String [] colunas = new String[grafo.getVerticesCount()+1];
+        String [][] matrizDados =  new String[2][grafo.getVerticesCount()+1];
+        colunas[0]="Vertices";
+        matrizDados[0][0]="Estimativas";
+        matrizDados[1][0]="Precedentes";
         for (int i = 0; i < grafo.getVerticesCount(); i++) {
-            colunas[i]=grafo.getVertices().get(i).getRotulo();
-            zero[i]=grafo.getVertices().get(i).getCusto().toString();
+            colunas[i+1]=grafo.getVertices().get(i).getRotulo();
+            matrizDados[0][i+1]=grafo.getVertices().get(i).getCusto().toString();
             if(grafo.getVertices().get(i).getAnterior()!=null){
-                um[i]=grafo.getVertices().get(i).getAnterior().getRotulo();
+                matrizDados[1][i+1]=grafo.getVertices().get(i).getAnterior().getRotulo();
             }else{
-                um[i]="inf";
+                matrizDados[1][i+1]=grafo.getVertices().get(i).getRotulo();
             }
         }
-//        V2_AsciiTable asciiTable = new V2_AsciiTable();
-//        asciiTable.addRule();
-//        asciiTable.addRow(colunas);
-//        asciiTable.addRule();
-//        asciiTable.addRow(zero);
-//        asciiTable.addRule();
-//        asciiTable.addRow(um);
-//        
-//        V2_AsciiTableRenderer rend = new V2_AsciiTableRenderer();
-//        rend.setTheme(V2_E_TableThemes.UTF_LIGHT.get());
-//        rend.setWidth(new WidthAbsoluteEven(76));
-//        
-//        RenderedTable rt = rend.render(asciiTable);
-//        
-//        System.out.println(rt);
-        for (int i=0; i<grafo.getVerticesCount();i++) {
-            System.out.print(colunas[i]+"\t");
-        }
-        System.out.println("");
-        for (int i=0; i<grafo.getVerticesCount();i++) {
-            System.out.print(zero[i]+"\t");
-        }
-        System.out.println("");
-        for (int i=0; i<grafo.getVerticesCount();i++) {
-            System.out.print(um[i]+"\t");
-        }
-        return resposta;
+        return "\n"+ASCIITable.getInstance().getTable(colunas, matrizDados);
+        
     }
 }
