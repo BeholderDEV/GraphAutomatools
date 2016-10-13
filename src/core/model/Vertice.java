@@ -18,6 +18,7 @@ public class Vertice {
     private Point position;
     boolean visitado = false;
     private Vertice anterior = null;
+    private Integer grau = 0;
     private Double custo = -1.0;
 
     public Vertice(int id, String rotulo) {
@@ -75,5 +76,12 @@ public class Vertice {
     public void setCusto(Double custo) {
         this.custo = custo;
     }
-    
+
+    public Integer getGrau() {
+        return grau;
+    }
+
+    public void setGrau(Integer grau) {
+        this.grau = grau;
+    }    
 }

@@ -33,6 +33,7 @@ public class Grafo {
     public Grafo(List<Vertice> vertices, List<Aresta> arestas) {
         this.vertices = vertices;
         this.arestas = arestas;
+        setGraus();
     }
     
     public void addVertice(Vertice vertice){
@@ -188,6 +189,13 @@ public class Grafo {
             }
         }
         return true;
+    }
+    
+    public void setGraus()    
+    {
+        for(Vertice vertice : vertices){
+            vertice.setGrau(this.getVizinhos(vertice).size());
+        }
     }
     
 }
