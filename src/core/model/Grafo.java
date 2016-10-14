@@ -180,6 +180,12 @@ public class Grafo {
         }
         visitados = new ArrayList<>();
     }
+    
+    public void resetAnteriores(){
+        for (Vertice vertice : vertices) {
+            vertice.setAnterior(null);
+        }
+    }
 
     public boolean verificarVisitados() {
         for(Vertice vertice : vertices){
