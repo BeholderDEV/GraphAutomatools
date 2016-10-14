@@ -10,6 +10,7 @@ import com.alee.extended.image.WebImage;
 import com.alee.laf.WebLookAndFeel;
 import core.algoritmos.BreadthFirstSearch;
 import core.algoritmos.DeepFirstSearch;
+import core.algoritmos.PlanarityTest;
 import core.algoritmos.SearchAlgorithm;
 import core.algoritmos.SearchAlgorithmFactory;
 import core.model.Aresta;
@@ -117,6 +118,7 @@ public class MainWindow extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        webButton6 = new com.alee.laf.button.WebButton();
         webButton5 = new com.alee.laf.button.WebButton();
         searchMethodChooser = new com.alee.laf.combobox.WebComboBox();
         webButton4 = new com.alee.laf.button.WebButton();
@@ -172,6 +174,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        webButton6.setText("Planaridade");
+        webButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton6ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(webButton6);
 
         webButton5.setText("Conectividade");
         webButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +284,17 @@ public class MainWindow extends javax.swing.JFrame {
         jTextArea1.setText(resposta);
     }//GEN-LAST:event_webButton5ActionPerformed
 
+    private void webButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton6ActionPerformed
+        String resposta = "";
+        if(PlanarityTest.isPlanar(grafo)){
+            resposta = "Grafo Planar";
+        }
+        if(resposta.isEmpty()){
+            resposta = "Grafo não Planar";
+        }
+        jTextArea1.setText(resposta);
+    }//GEN-LAST:event_webButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,5 +335,6 @@ public class MainWindow extends javax.swing.JFrame {
     private com.alee.laf.button.WebButton webButton1;
     private com.alee.laf.button.WebButton webButton4;
     private com.alee.laf.button.WebButton webButton5;
+    private com.alee.laf.button.WebButton webButton6;
     // End of variables declaration//GEN-END:variables
 }

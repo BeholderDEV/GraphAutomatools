@@ -90,6 +90,7 @@ public class XMLReader {
                             grafo.addAresta(new Aresta(grafo.getVertice(idVertice1), grafo.getVertice(idVertice2), peso));
                         }
                     }
+                    grafo.setGraus();
                     return grafo;
                 }
             } catch (Exception ex) {

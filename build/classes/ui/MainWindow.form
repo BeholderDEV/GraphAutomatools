@@ -145,6 +145,14 @@
             <Property name="alignment" type="int" value="2"/>
           </Layout>
           <SubComponents>
+            <Component class="com.alee.laf.button.WebButton" name="webButton6">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Planaridade"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="webButton6ActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="com.alee.laf.button.WebButton" name="webButton5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Conectividade"/>
