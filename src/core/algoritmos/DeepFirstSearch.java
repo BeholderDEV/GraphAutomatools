@@ -18,10 +18,6 @@ public class DeepFirstSearch implements SearchAlgorithm{
     
     @Override
     public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
-        if(idVerticeInicial==idVerticeInicial)
-        {
-            return grafo.getVertice(idVerticeInicial);
-        }            
         Vertice verticeInicial = grafo.getVertice(idVerticeInicial);
         verticeInicial.setVisitado(true);
         grafo.addVisitado(verticeInicial);
