@@ -106,13 +106,12 @@ public class PlanarityTest {
     
     public static boolean hasK5(Grafo g, List<Vertice> permutaveis)
     {
-        SearchAlgorithm sa = SearchAlgorithmFactory.build(SearchAlgorithmFactory.DIJKSTRA_SEARCH);
+        SearchAlgorithm sa = SearchAlgorithmFactory.build(SearchAlgorithmFactory.BREADTH_FIRST_SEARCH);
         g.resetProperties();
         for (int i = 0; i < permutaveis.size(); i++) {
             for (int j = i; j < permutaveis.size(); j++) {
                 if(i!=j){
-                    Vertice procurado = sa.search(g, permutaveis.get(i).getId(), permutaveis.get(j).getId());
-                    if(procurado==null){
+                    if(sa.search(g, permutaveis.get(i).getId(), permutaveis.get(j).getId())==null){
                         System.out.println("deu merda "+permutaveis.get(i).getRotulo()+" pro "+permutaveis.get(j).getRotulo());
                         return false;
                     }
