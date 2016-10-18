@@ -8,8 +8,6 @@ package ui;
 import com.alee.extended.image.DisplayType;
 import com.alee.extended.image.WebImage;
 import com.alee.laf.WebLookAndFeel;
-import core.algoritmos.BreadthFirstSearch;
-import core.algoritmos.DeepFirstSearch;
 import core.algoritmos.PlanarityTest;
 import core.algoritmos.SearchAlgorithm;
 import core.algoritmos.SearchAlgorithmFactory;
@@ -51,6 +49,7 @@ public class MainWindow extends javax.swing.JFrame {
         WeblafUtils.configurarBotao(webButton1);
         WeblafUtils.configurarBotao(webButton4);
         WeblafUtils.configurarBotao(webButton5);
+        WeblafUtils.configurarBotao(webButton6);
         jPanel1.setBackground(ColorController.COR_PRINCIPAL);
         jLabel1.setForeground(ColorController.COR_LETRA);
         jLabel2.setForeground(ColorController.COR_LETRA);
