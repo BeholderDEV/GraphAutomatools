@@ -95,7 +95,14 @@ public class GraphDrawer {
         }
         
         for (Vertice fork: graph.getVertices()) {
-            gd.setColor(new Color(69,189,255));
+            if(fork.getCor()==null)
+            {
+                gd.setColor(new Color(69,189,255));
+            }
+            else
+            {
+                gd.setColor(fork.getCor());
+            }
             gd.fillOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
             gd.setColor(ColorController.COR_LETRA);
             gd.drawOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);

@@ -109,6 +109,7 @@ public class MainPanelController {
         Coloring coloracao =  new Coloring(grafo);        
         String resposta = "Usa-se "+coloracao.ColorGraph()+" cores";
         mainPanel.getTextArea().setText(resposta);
+        setImage(drawImage());
     }
     
 }
