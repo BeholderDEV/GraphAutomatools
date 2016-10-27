@@ -38,6 +38,7 @@ public class MainPanel extends javax.swing.JPanel {
         WeblafUtils.configurarBotao(webButton4);
         WeblafUtils.configurarBotao(webButton5);
         WeblafUtils.configurarBotao(webButton6);
+        WeblafUtils.configurarBotao(webButton7);
         jPanel1.setBackground(ColorController.COR_PRINCIPAL);
         jLabel1.setForeground(ColorController.COR_LETRA);
         jLabel2.setForeground(ColorController.COR_LETRA);
@@ -90,6 +91,7 @@ public class MainPanel extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        webButton7 = new com.alee.laf.button.WebButton();
         webButton6 = new com.alee.laf.button.WebButton();
         webButton5 = new com.alee.laf.button.WebButton();
         searchMethodChooser = new com.alee.laf.combobox.WebComboBox();
@@ -147,6 +149,14 @@ public class MainPanel extends javax.swing.JPanel {
 
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        webButton7.setText("Colorir");
+        webButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton7ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(webButton7);
 
         webButton6.setText("Planaridade");
         webButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +245,10 @@ public class MainPanel extends javax.swing.JPanel {
         controller.readXML();
     }//GEN-LAST:event_webButton1ActionPerformed
 
+    private void webButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton7ActionPerformed
+        controller.coloracao();
+    }//GEN-LAST:event_webButton7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel imagePanel;
@@ -256,5 +270,6 @@ public class MainPanel extends javax.swing.JPanel {
     private com.alee.laf.button.WebButton webButton4;
     private com.alee.laf.button.WebButton webButton5;
     private com.alee.laf.button.WebButton webButton6;
+    private com.alee.laf.button.WebButton webButton7;
     // End of variables declaration//GEN-END:variables
 }

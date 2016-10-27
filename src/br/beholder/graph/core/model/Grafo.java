@@ -10,6 +10,7 @@ import br.beholder.graph.core.algoritmos.test.PlanarityTest;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
 import br.beholder.graph.core.algoritmos.test.TestAlgorithm;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,11 +28,22 @@ public class Grafo {
     private Boolean dirigido = false;
     private TestAlgorithm planar = new PlanarityTest(this);
     private TestAlgorithm conexo = new ConectivityTest(this);
+    private List<Color> lista_cores = new ArrayList<>();
     
     public Grafo() {
         visitados = new ArrayList<>();
         vertices = new ArrayList<>();
         arestas = new ArrayList<>();
+        lista_cores.add(Color.red);
+        lista_cores.add(Color.CYAN);
+        lista_cores.add(Color.MAGENTA);
+        lista_cores.add(Color.BLUE);
+        lista_cores.add(Color.YELLOW);
+        lista_cores.add(Color.gray);
+        lista_cores.add(Color.pink);
+        lista_cores.add(Color.GREEN);
+        lista_cores.add(Color.DARK_GRAY);
+        lista_cores.add(Color.LIGHT_GRAY);
     }
 
     public boolean isPlanar(){
@@ -198,6 +210,25 @@ public class Grafo {
         for(Vertice vertice : vertices){
             vertice.setGrau(this.getVizinhos(vertice).size());
         }
+    }
+
+    public Vertice getVerticeMaiorGrau() {
+        int maior_grau = 0;
+        Vertice maior = vertices.get(0);
+        for(Vertice vertice : vertices)
+        {
+            if(vertice.getGrau()>maior_grau)
+            {
+                maior_grau = vertice.getGrau();
+                maior = vertice;
+            }
+        }
+        return maior;
+    }
+    
+    public Color getCorNumero (int i)
+    {
+        return lista_cores.get(i);
     }
     
 }

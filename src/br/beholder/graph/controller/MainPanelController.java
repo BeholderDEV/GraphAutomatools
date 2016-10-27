@@ -5,6 +5,7 @@
  */
 package br.beholder.graph.controller;
 
+import br.beholder.graph.core.algoritmos.coloracao.Coloring;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
 import br.beholder.graph.core.model.Aresta;
@@ -103,6 +104,11 @@ public class MainPanelController {
         mainPanel.getTextArea().setText(resposta);
     }
     
-    
+    public void coloracao()
+    {
+        Coloring coloracao =  new Coloring(grafo);        
+        String resposta = "Usa-se "+coloracao.ColorGraph()+" cores";
+        mainPanel.getTextArea().setText(resposta);
+    }
     
 }
