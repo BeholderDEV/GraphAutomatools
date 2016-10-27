@@ -5,6 +5,7 @@
  */
 package br.beholder.graph.core.model;
 
+import java.awt.Color;
 import java.awt.Point;
 
 
@@ -20,6 +21,7 @@ public class Vertice {
     private Vertice anterior = null;
     private Integer grau = 0;
     private Double custo = -1.0;
+    private Color cor;
 
     public Vertice(int id, String rotulo) {
         this.id = id;
@@ -32,10 +34,17 @@ public class Vertice {
         this.position = position;
     }
 
+    public Color getCor() {
+        return cor;
+    }
+
+    public void setCor(Color cor) {
+        this.cor = cor;
+    }
     public boolean isVisitado() {
         return visitado;
     }
-
+    
     public void setVisitado(boolean visitado) {
         this.visitado = visitado;
     }

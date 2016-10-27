@@ -5,9 +5,8 @@
  */
 package br.beholder.graph.controller;
 
-import br.beholder.graph.core.algoritmos.PlanarityTest;
-import br.beholder.graph.core.algoritmos.SearchAlgorithm;
-import br.beholder.graph.core.algoritmos.SearchAlgorithmFactory;
+import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
+import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
 import br.beholder.graph.core.model.Aresta;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
@@ -18,10 +17,6 @@ import br.beholder.graph.ui.graph.GraphDrawer;
 import com.alee.extended.image.DisplayType;
 import com.alee.extended.image.WebImage;
 import java.awt.Image;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -75,8 +70,8 @@ public class MainPanelController {
     public void search(){
         if(grafo!=null){
             grafo.resetProperties();
-            SearchAlgorithm sa = SearchAlgorithmFactory.build(mainPanel.getSearchMethod());
-            Vertice vertice = sa.search(grafo,getVerticeID(mainPanel.getIDVerticeInicial()),getVerticeID(mainPanel.getIDVerticeFinal()));
+            SearchAlgorithm sa = SearchAlgorithmFactory.build(grafo, mainPanel.getSearchMethod());
+            Vertice vertice = sa.search(getVerticeID(mainPanel.getIDVerticeInicial()),getVerticeID(mainPanel.getIDVerticeFinal()));
             Aresta aresta;
             String path = VerticeUtils.getPath(grafo,vertice,getVerticeID(mainPanel.getIDVerticeFinal()));
             if(mainPanel.getSearchMethod() == SearchAlgorithmFactory.DIJKSTRA_SEARCH){
@@ -99,7 +94,7 @@ public class MainPanelController {
     }
     
     public void conectividade(){
-        String resposta = (grafo.isDesconexo()) ? "Grafo Desconexo":"Grafo Conexo";
+        String resposta = (grafo.isConexo()) ? "Grafo Conexo":"Grafo Desconexo";
         mainPanel.getTextArea().setText(resposta);
     }
     

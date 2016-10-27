@@ -6,7 +6,7 @@
 package br.beholder.graph.ui;
 
 import br.beholder.graph.controller.MainPanelController;
-import br.beholder.graph.core.algoritmos.SearchAlgorithmFactory;
+import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
 import br.beholder.graph.core.model.Vertice;
 import br.beholder.graph.ui.utils.ColorController;
 import br.beholder.graph.ui.webLaf.WeblafUtils;

@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.beholder.graph.core.algoritmos;
+package br.beholder.graph.core.algoritmos.test;
 
+import br.beholder.graph.core.algoritmos.GraphAlgorithm;
+import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
+import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 import java.util.ArrayList;
@@ -14,58 +17,29 @@ import java.util.List;
  *
  * @author Adson Estevesa
  */
-public class PlanarityTest {
-    
-    public static boolean isPlanar(Grafo g)
-    {
-        if(g.getVerticesCount()<=3)
-        {
-            return true;
-        }          
+public class PlanarityTest extends GraphAlgorithm implements TestAlgorithm{
 
-//        if(ishomeomorphictoK5(g) || ishomeomorphictoK33(g))
-        if(ishomeomorphictoK5(g))
-        {
-            System.out.println("testaK5");
-            return false;
-        }
-        else
-        {
-            if(g.getArestasCount()<=3*g.getVerticesCount()-6){
-                if(!has3Cycle(g) && g.getVerticesCount()>=3)
-                {
-                    if(g.getArestasCount()<=2*g.getVerticesCount()-4)
-                    {
-                        return true;
-                    }
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-            
-        return false;
+    public PlanarityTest(Grafo grafo) {
+        super(grafo);
     }
-    
-    public static boolean is3Cycled(Grafo g, int tamanhoCiclo, Vertice atual, Vertice fim){
+        
+    private boolean is3Cycled(int tamanhoCiclo, Vertice atual, Vertice fim){
         
         if(tamanhoCiclo == 3){
             return atual.getRotulo().equals(fim.getRotulo());
         }
-        for (Vertice v : g.getVizinhos(atual)) {
-            if(is3Cycled(g, tamanhoCiclo + 1, v, fim)){
+        for (Vertice v : grafo.getVizinhos(atual)) {
+            if(is3Cycled(tamanhoCiclo + 1, v, fim)){
                 return true;
             }
         }
         return false;
     }
-    public static boolean has3Cycle(Grafo g)
+    private  boolean has3Cycle()
     {
-        List<Vertice> vertices = g.getVertices();
+        List<Vertice> vertices = grafo.getVertices();
         for (Vertice v : vertices) {
-            if(is3Cycled(g, 0, v, v)){
+            if(is3Cycled(0, v, v)){
                 return true;
             }
         }
@@ -74,9 +48,9 @@ public class PlanarityTest {
     
     
     
-    public static boolean ishomeomorphictoK5(Grafo g)
+    private boolean ishomeomorphictoK5()
     {
-        List<Vertice> vertices = g.getVertices();
+        List<Vertice> vertices = grafo.getVertices();
         
         vertices = remove3Less(vertices);
         
@@ -92,7 +66,7 @@ public class PlanarityTest {
             permutaveis.add(vertices.get((i+2)%vertices.size()));
             permutaveis.add(vertices.get((i+3)%vertices.size()));
             permutaveis.add(vertices.get((i+4)%vertices.size()));
-            if(hasK5(g, permutaveis)){
+            if(hasK5(permutaveis)){
                 return true;
             }
             System.out.println("entrou");
@@ -100,9 +74,9 @@ public class PlanarityTest {
         return false;
     }
     
-    public static boolean ishomeomorphictoK33(Grafo g)
+    private boolean ishomeomorphictoK33()
     {
-        List<Vertice> vertices = g.getVertices();
+        List<Vertice> vertices = grafo.getVertices();
         vertices = remove2Less(vertices);
         
         if(vertices.size()<6)
@@ -118,7 +92,7 @@ public class PlanarityTest {
             permutaveisN.add(vertices.get((i+3)%vertices.size()));
             permutaveisN.add(vertices.get((i+4)%vertices.size()));
             permutaveisN.add(vertices.get((i+5)%vertices.size()));
-            if(hasK33(g, permutaveisM, permutaveisN)){
+            if(hasK33(permutaveisM, permutaveisN)){
                 return true;
             }
             System.out.println("entrou");
@@ -126,21 +100,21 @@ public class PlanarityTest {
         return false;
     }
     
-    public static boolean hasK5(Grafo g, List<Vertice> permutaveis)
+    private boolean hasK5(List<Vertice> permutaveis)
     {
-        SearchAlgorithm sa = SearchAlgorithmFactory.build(SearchAlgorithmFactory.BREADTH_FIRST_SEARCH);
-        g.resetProperties();
+        SearchAlgorithm sa = SearchAlgorithmFactory.build(grafo, SearchAlgorithmFactory.BREADTH_FIRST_SEARCH);
+        grafo.resetProperties();
         for (int i = 0; i < permutaveis.size(); i++) {
             for (int j = i; j < permutaveis.size(); j++) {
                 if(i!=j){
-                    Vertice v = sa.search(g, permutaveis.get(i).getId(), permutaveis.get(j).getId());
+                    Vertice v = sa.search(permutaveis.get(i).getId(), permutaveis.get(j).getId());
                     if(v==null){
                         System.out.println("deu merda "+permutaveis.get(i).getRotulo()+" pro "+permutaveis.get(j).getRotulo());
                         return false;
                     }
 //                    reajustar_visitados(g, v);
-                    g.getVertice(permutaveis.get(i).getId()).setVisitado(false);
-                    g.getVertice(permutaveis.get(j).getId()).setVisitado(false);
+                    grafo.getVertice(permutaveis.get(i).getId()).setVisitado(false);
+                    grafo.getVertice(permutaveis.get(j).getId()).setVisitado(false);
                 }                
                 System.out.println("deboa "+permutaveis.get(i).getRotulo()+" pro "+permutaveis.get(j).getRotulo());
             }
@@ -148,21 +122,21 @@ public class PlanarityTest {
         return true;
     }
     
-    public static boolean hasK33(Grafo g, List<Vertice> permutaveisM, List<Vertice> permutaveisN)
+    private boolean hasK33(List<Vertice> permutaveisM, List<Vertice> permutaveisN)
     {
-        g.resetProperties();
-        SearchAlgorithm sa = SearchAlgorithmFactory.build(SearchAlgorithmFactory.BREADTH_FIRST_SEARCH);
+        grafo.resetProperties();
+        SearchAlgorithm sa = SearchAlgorithmFactory.build(grafo, SearchAlgorithmFactory.BREADTH_FIRST_SEARCH);
         for (int i = 0; i < permutaveisM.size(); i++) {
             for (int j = 0; j < permutaveisN.size(); j++) {
                 if(i!=j){
-                    Vertice N = sa.search(g, permutaveisM.get(i).getId(), permutaveisN.get(j).getId());
+                    Vertice N = sa.search(permutaveisM.get(i).getId(), permutaveisN.get(j).getId());
                     System.out.println("Tentar "+permutaveisM.get(i).getRotulo()+" pro "+permutaveisN.get(j).getRotulo());
                     if(N==null){
                         System.out.println("deu merda "+permutaveisM.get(i).getRotulo()+" pro "+permutaveisN.get(j).getRotulo());
                         return false;
                     }
-                    g.getVertice(permutaveisM.get(i).getId()).setVisitado(false);
-                    g.getVertice(permutaveisN.get(j).getId()).setVisitado(false);
+                    grafo.getVertice(permutaveisM.get(i).getId()).setVisitado(false);
+                    grafo.getVertice(permutaveisN.get(j).getId()).setVisitado(false);
                 }                
                 System.out.println("deboa "+permutaveisM.get(i).getRotulo()+" pro "+permutaveisN.get(j).getRotulo());
             }
@@ -170,7 +144,7 @@ public class PlanarityTest {
         return true;
     }
     
-    public static List<Vertice> remove3Less(List<Vertice> vertices)
+    private List<Vertice> remove3Less(List<Vertice> vertices)
     {
         List<Vertice> higher =  new ArrayList<>();
         
@@ -183,7 +157,7 @@ public class PlanarityTest {
         }
         return higher;
     }
-    public static List<Vertice> remove2Less(List<Vertice> vertices)
+    private List<Vertice> remove2Less(List<Vertice> vertices)
     {
         List<Vertice> higher =  new ArrayList<>();
         
@@ -197,8 +171,8 @@ public class PlanarityTest {
         return higher;
     }
 
-    private static void reajustar_visitados(Grafo g, Vertice N) {
-        g.resetProperties();
+    private void reajustar_visitados(Vertice N) {
+        grafo.resetProperties();
         while(N.getAnterior()!=null)
         {
             N = N.getAnterior();
@@ -214,5 +188,36 @@ public class PlanarityTest {
             if(vertice.isVisitado())
             System.out.println(vertice.getRotulo()+" ");
         }
+    }
+
+    @Override
+    public boolean is() {
+        if(grafo.getVerticesCount()<=3)
+        {
+            return true;
+        }          
+
+//        if(ishomeomorphictoK5(g) || ishomeomorphictoK33(g))
+        if(ishomeomorphictoK5())
+        {
+            System.out.println("testaK5");
+            return false;
+        }
+        else
+        {
+            if(grafo.getArestasCount()<=3*grafo.getVerticesCount()-6){
+                if(!has3Cycle() && grafo.getVerticesCount()>=3)
+                {
+                    boolean isPlanar = grafo.getArestasCount()<=2*grafo.getVerticesCount()-4;
+                    return isPlanar;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+            
+        return false;
     }
 }

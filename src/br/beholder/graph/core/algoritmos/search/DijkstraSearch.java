@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.beholder.graph.core.algoritmos;
+package br.beholder.graph.core.algoritmos.search;
 
+import br.beholder.graph.core.algoritmos.GraphAlgorithm;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 import java.util.LinkedList;
@@ -14,10 +15,14 @@ import java.util.Queue;
  *
  * @author lite
  */
-public class DijkstraSearch implements SearchAlgorithm{
+public class DijkstraSearch extends GraphAlgorithm implements SearchAlgorithm{
+
+    public DijkstraSearch(Grafo grafo) {
+        super(grafo);
+    }
 
     @Override
-    public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado) {
+    public Vertice search(int idVerticeInicial, int idVerticeProcurado) {
         Queue<Vertice> vertices = new LinkedList<>();
         vertices.add(grafo.getVertice(idVerticeInicial));
         vertices.peek().setCusto(0.0);

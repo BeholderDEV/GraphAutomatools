@@ -5,9 +5,11 @@
  */
 package br.beholder.graph.core.model;
 
-import br.beholder.graph.core.algoritmos.PlanarityTest;
-import br.beholder.graph.core.algoritmos.SearchAlgorithm;
-import br.beholder.graph.core.algoritmos.SearchAlgorithmFactory;
+import br.beholder.graph.core.algoritmos.test.ConectivityTest;
+import br.beholder.graph.core.algoritmos.test.PlanarityTest;
+import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
+import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
+import br.beholder.graph.core.algoritmos.test.TestAlgorithm;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,16 +20,14 @@ import java.util.List;
  * @author lite
  */
 public class Grafo {
-    List<Vertice> vertices;
-    List<Vertice> visitados;
-    List<Aresta> arestas;
-    Boolean ponderado = false;
-    Boolean dirigido = false;
+    private List<Vertice> vertices;
+    private List<Vertice> visitados;
+    private List<Aresta> arestas;
+    private Boolean ponderado = false;
+    private Boolean dirigido = false;
+    private TestAlgorithm planar = new PlanarityTest(this);
+    private TestAlgorithm conexo = new ConectivityTest(this);
     
-    
-    
-    
-
     public Grafo() {
         visitados = new ArrayList<>();
         vertices = new ArrayList<>();
@@ -35,7 +35,10 @@ public class Grafo {
     }
 
     public boolean isPlanar(){
-        return PlanarityTest.isPlanar(this);
+        return planar.is();
+    }
+    public boolean isConexo(){
+        return conexo.is();
     }
     
     public Grafo(List<Vertice> vertices, List<Aresta> arestas) {
@@ -134,21 +137,6 @@ public class Grafo {
     public boolean hasVertice(int id){
         for (Vertice vertice : vertices) {
             if(vertice.getId()==id){
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public boolean isDesconexo()
-    {
-        SearchAlgorithm sa = SearchAlgorithmFactory.build(SearchAlgorithmFactory.BREADTH_FIRST_SEARCH);
-        for(Vertice vertice : vertices)
-        {
-            resetProperties();
-            sa.search(this, vertice.getId(), -1);
-            if(!verificarVisitados())
-            {
                 return true;
             }
         }

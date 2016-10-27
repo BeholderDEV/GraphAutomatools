@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.beholder.graph.core.algoritmos;
+package br.beholder.graph.core.algoritmos.search;
 
+import br.beholder.graph.core.algoritmos.GraphAlgorithm;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 import java.util.LinkedList;
@@ -14,10 +15,14 @@ import java.util.Queue;
  *
  * @author Adson Estevesa
  */
-public class BreadthFirstSearch implements SearchAlgorithm{
+public class BreadthFirstSearch extends GraphAlgorithm implements SearchAlgorithm{
+
+    public BreadthFirstSearch(Grafo grafo) {
+        super(grafo);
+    }   
     
     @Override
-    public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
+    public Vertice search(int idVerticeInicial, int idVerticeProcurado){
         
         if(idVerticeInicial == idVerticeProcurado)
         {

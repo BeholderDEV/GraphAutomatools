@@ -6,12 +6,15 @@
 package br.beholder.graph.core.algoritmos;
 
 import br.beholder.graph.core.model.Grafo;
-import br.beholder.graph.core.model.Vertice;
 
 /**
  *
  * @author lite
  */
-public interface SearchAlgorithm {
-     public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado);
+public abstract class GraphAlgorithm {
+    protected Grafo grafo;
+
+    public GraphAlgorithm(Grafo grafo) {
+        this.grafo = grafo;
+    }
 }

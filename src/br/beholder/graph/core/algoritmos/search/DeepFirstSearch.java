@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.beholder.graph.core.algoritmos;
+package br.beholder.graph.core.algoritmos.search;
 
+import br.beholder.graph.core.algoritmos.GraphAlgorithm;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 
@@ -12,12 +13,14 @@ import br.beholder.graph.core.model.Vertice;
  *
  * @author lite
  */
-public class DeepFirstSearch implements SearchAlgorithm{
-    
-    
+public class DeepFirstSearch extends GraphAlgorithm implements SearchAlgorithm{
+
+    public DeepFirstSearch(Grafo grafo) {
+        super(grafo);
+    }
     
     @Override
-    public Vertice search(Grafo grafo, int idVerticeInicial, int idVerticeProcurado){
+    public Vertice search(int idVerticeInicial, int idVerticeProcurado){
         Vertice verticeInicial = grafo.getVertice(idVerticeInicial);
         verticeInicial.setVisitado(true);
         grafo.addVisitado(verticeInicial);
@@ -32,7 +35,7 @@ public class DeepFirstSearch implements SearchAlgorithm{
                     grafo.addVisitado(n);
                     return n;
                 }
-                Vertice son = search(grafo, n.getId(), idVerticeProcurado);
+                Vertice son = search(n.getId(), idVerticeProcurado);
                 if(son != null){
                     return son;
                 }
