@@ -5,7 +5,6 @@
  */
 package br.beholder.graph.core.algoritmos.test;
 
-import br.beholder.graph.core.algoritmos.GraphAlgorithm;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
 import br.beholder.graph.core.model.Grafo;
@@ -16,7 +15,7 @@ import java.util.List;
  *
  * @author lite
  */
-public class ConectivityTest extends GraphAlgorithm implements TestAlgorithm{
+public class ConectivityTest extends TestAlgorithm{
  
     public ConectivityTest(Grafo grafo) {
         super(grafo);

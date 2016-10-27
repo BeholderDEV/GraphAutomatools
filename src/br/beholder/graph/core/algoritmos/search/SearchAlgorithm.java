@@ -5,12 +5,19 @@
  */
 package br.beholder.graph.core.algoritmos.search;
 
+import br.beholder.graph.core.algoritmos.GraphAlgorithm;
+import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 
 /**
  *
  * @author lite
  */
-public interface SearchAlgorithm {
-    public Vertice search(int idVerticeInicial, int idVerticeProcurado);
+public abstract class SearchAlgorithm extends GraphAlgorithm{
+
+    public SearchAlgorithm(Grafo grafo) {
+        super(grafo);
+    }
+    
+    public abstract Vertice search(int idVerticeInicial, int idVerticeProcurado);
 }

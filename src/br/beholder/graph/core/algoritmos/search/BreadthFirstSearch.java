@@ -5,7 +5,6 @@
  */
 package br.beholder.graph.core.algoritmos.search;
 
-import br.beholder.graph.core.algoritmos.GraphAlgorithm;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 import java.util.LinkedList;
@@ -15,7 +14,7 @@ import java.util.Queue;
  *
  * @author Adson Estevesa
  */
-public class BreadthFirstSearch extends GraphAlgorithm implements SearchAlgorithm{
+public class BreadthFirstSearch extends SearchAlgorithm{
 
     public BreadthFirstSearch(Grafo grafo) {
         super(grafo);

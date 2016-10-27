@@ -5,7 +5,6 @@
  */
 package br.beholder.graph.core.algoritmos.search;
 
-import br.beholder.graph.core.algoritmos.GraphAlgorithm;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 
@@ -13,7 +12,7 @@ import br.beholder.graph.core.model.Vertice;
  *
  * @author lite
  */
-public class DeepFirstSearch extends GraphAlgorithm implements SearchAlgorithm{
+public class DeepFirstSearch extends SearchAlgorithm{
 
     public DeepFirstSearch(Grafo grafo) {
         super(grafo);

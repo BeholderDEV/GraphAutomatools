@@ -5,7 +5,6 @@
  */
 package br.beholder.graph.core.algoritmos.test;
 
-import br.beholder.graph.core.algoritmos.GraphAlgorithm;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
 import br.beholder.graph.core.model.Grafo;
@@ -17,7 +16,7 @@ import java.util.List;
  *
  * @author Adson Estevesa
  */
-public class PlanarityTest extends GraphAlgorithm implements TestAlgorithm{
+public class PlanarityTest extends TestAlgorithm{
 
     public PlanarityTest(Grafo grafo) {
         super(grafo);

@@ -5,10 +5,18 @@
  */
 package br.beholder.graph.core.algoritmos.test;
 
+import br.beholder.graph.core.algoritmos.GraphAlgorithm;
+import br.beholder.graph.core.model.Grafo;
+
 /**
  *
  * @author lite
  */
-public interface TestAlgorithm{
-    public boolean is();
+public abstract class TestAlgorithm extends GraphAlgorithm{
+
+    public TestAlgorithm(Grafo grafo) {
+        super(grafo);
+    }
+    
+    public abstract boolean is();
 }
