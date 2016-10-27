@@ -34,16 +34,15 @@ public class Grafo {
         visitados = new ArrayList<>();
         vertices = new ArrayList<>();
         arestas = new ArrayList<>();
-        lista_cores.add(Color.red);
-        lista_cores.add(Color.CYAN);
-        lista_cores.add(Color.MAGENTA);
-        lista_cores.add(Color.BLUE);
-        lista_cores.add(Color.YELLOW);
-        lista_cores.add(Color.gray);
-        lista_cores.add(Color.pink);
-        lista_cores.add(Color.GREEN);
-        lista_cores.add(Color.DARK_GRAY);
-        lista_cores.add(Color.LIGHT_GRAY);
+        lista_cores.add(new Color(26, 188, 156));        
+        lista_cores.add(new Color(52, 152, 219));  
+        lista_cores.add(new Color(230, 126, 34));  
+        lista_cores.add(new Color(155, 89, 182));  
+        lista_cores.add(new Color(231, 76, 60));  
+        lista_cores.add(new Color(46, 204, 113));  
+        lista_cores.add(new Color(52, 73, 94));  
+        lista_cores.add(new Color(241, 196, 15));  
+        lista_cores.add(new Color(192, 57, 43));  
     }
 
     public boolean isPlanar(){

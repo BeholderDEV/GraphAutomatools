@@ -65,7 +65,7 @@ public class Coloring {
         boolean corValida;
         List<Vertice> vizinhos = grafo.getVizinhos(verticeAtual);
         for(int i = 1; i <= NumeroCores; i++){
-            verticeAtual.setCor(grafo.getCorNumero(i));
+            verticeAtual.setCor(grafo.getCorNumero(i-1));
             corValida = true;
             for (Vertice vizinho : removeNonColored(vizinhos)) {
                 if(vizinho.getCor().getRGB() == verticeAtual.getCor().getRGB()){
@@ -81,7 +81,7 @@ public class Coloring {
     
     public int ColorGraph(){
         int NumeroCores = 1;
-        grafo.getVerticeMaiorGrau().setCor(grafo.getCorNumero(1));
+        grafo.getVerticeMaiorGrau().setCor(grafo.getCorNumero(0));
         Vertice verticeAtual;
         while(true){
             verticeAtual = getVerticeHigherSaturation();
@@ -90,7 +90,7 @@ public class Coloring {
             }
             if(ultimaCor == NumeroCores){
                 NumeroCores++;
-                verticeAtual.setCor(grafo.getCorNumero(NumeroCores));
+                verticeAtual.setCor(grafo.getCorNumero(NumeroCores-1));
             }else{
                 doNewColor(verticeAtual, NumeroCores);
             }
