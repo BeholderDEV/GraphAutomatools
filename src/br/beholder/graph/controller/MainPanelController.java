@@ -18,6 +18,8 @@ import br.beholder.graph.ui.graph.GraphDrawer;
 import com.alee.extended.image.DisplayType;
 import com.alee.extended.image.WebImage;
 import java.awt.Image;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -26,10 +28,11 @@ import javax.swing.SwingUtilities;
  * @author lite
  */
 public class MainPanelController {
-    MainPanel mainPanel;
+    private static final ExecutorService SERVICE = Executors.newCachedThreadPool();
+    private MainPanel mainPanel;
     private Grafo grafo;
-    GraphDrawer drawer;
-    Coloring coloracao;
+    private GraphDrawer drawer;
+    private Coloring coloracao;
 
     public MainPanelController(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
@@ -45,16 +48,13 @@ public class MainPanelController {
     }
     
     private void setImage(Image image){
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JPanel imgPanel = mainPanel.getImagePanel();
-                imgPanel.removeAll();
-                WebImage webImage = new WebImage(image);
-                webImage.setDisplayType(DisplayType.fitComponent);
-                imgPanel.add(webImage);
-                imgPanel.revalidate();
-            }
+        SwingUtilities.invokeLater(() -> {
+            JPanel imgPanel = mainPanel.getImagePanel();
+            imgPanel.removeAll();
+            WebImage webImage = new WebImage(image);
+            webImage.setDisplayType(DisplayType.fitComponent);
+            imgPanel.add(webImage);
+            imgPanel.revalidate();
         });
     }
     
@@ -70,50 +70,69 @@ public class MainPanelController {
     
     
     public void search(){
-        if(grafo!=null){
-            grafo.resetProperties();
-            SearchAlgorithm sa = SearchAlgorithmFactory.build(grafo, mainPanel.getSearchMethod());
-            Vertice vertice = sa.search(getVerticeID(mainPanel.getIDVerticeInicial()),getVerticeID(mainPanel.getIDVerticeFinal()));
-            Aresta aresta;
-            String path = VerticeUtils.getPath(grafo,vertice,getVerticeID(mainPanel.getIDVerticeFinal()));
-            if(mainPanel.getSearchMethod() == SearchAlgorithmFactory.DIJKSTRA_SEARCH){
-                path=path.concat(VerticeUtils.getTabelaCustos(grafo));
-            }
-            
-            mainPanel.getTextArea().setText(path);
-            if(vertice!=null){
-                while(vertice.getAnterior()!=null)
-                {
-                    aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
-                    aresta.setHinted(true);
-                    vertice = vertice.getAnterior();
+        Runnable r = () -> {
+            if(grafo!=null){
+                grafo.resetAll();
+                SearchAlgorithm sa = SearchAlgorithmFactory.build(grafo, mainPanel.getSearchMethod());
+                Vertice vertice = sa.search(getVerticeID(mainPanel.getIDVerticeInicial()),getVerticeID(mainPanel.getIDVerticeFinal()));
+                Aresta aresta;
+                //String path = 
+                StringBuilder path = new StringBuilder();
+                path.append(VerticeUtils.getPath(grafo,vertice,getVerticeID(mainPanel.getIDVerticeFinal())));
+                if(mainPanel.getSearchMethod() == SearchAlgorithmFactory.DIJKSTRA_SEARCH){
+                    path.append(VerticeUtils.getTabelaCustos(grafo));
                 }
+                String resposta = path.toString();
+                SwingUtilities.invokeLater(() -> {
+                    mainPanel.getTextArea().setText(resposta);
+                });
+                if(vertice!=null){
+                    while(vertice.getAnterior()!=null)
+                    {
+                        aresta = grafo.getAresta(vertice.getAnterior().getId() ,vertice.getId());
+                        aresta.setHinted(true);
+                        vertice = vertice.getAnterior();
+                    }
+                }
+                setImage(drawImage());
             }
-            setImage(drawImage());
-        }
-        else{
-        }
+        };
+        SERVICE.submit(r);
     }
     
     public void conectividade(){
-        grafo.resetProperties();
-        String resposta = (grafo.isConexo()) ? "Grafo Conexo":"Grafo Desconexo";
-        mainPanel.getTextArea().setText(resposta);
+        Runnable r = () -> {
+            grafo.resetAll();
+            String resposta = (grafo.isConexo()) ? "Grafo Conexo":"Grafo Desconexo";
+            SwingUtilities.invokeLater(() -> {
+                mainPanel.getTextArea().setText(resposta);
+            });
+        };
+        SERVICE.submit(r);
     }
     
     public void planaridade(){
-        grafo.resetProperties();
-        String resposta = (grafo.isPlanar()) ? "Grafo Planar":"Grafo não Planar";
-        mainPanel.getTextArea().setText(resposta);
+        Runnable r = () -> {
+            grafo.resetAll();
+            String resposta = (grafo.isPlanar()) ? "Grafo Planar":"Grafo não Planar";
+            SwingUtilities.invokeLater(() -> {
+                mainPanel.getTextArea().setText(resposta);
+            });
+        };
+        SERVICE.submit(r);
     }
     
-    public void coloracao()
-    {
-        grafo.resetProperties();
-        coloracao =  new Coloring(grafo);
-        String resposta = "Usa-se "+coloracao.ColorGraph()+" cores";
-        mainPanel.getTextArea().setText(resposta);
-        setImage(drawImage());
+    public void coloracao() {
+        Runnable r = () -> {
+            grafo.resetAll();
+            coloracao =  new Coloring(grafo);
+            String resposta = "Usa-se "+coloracao.ColorGraph()+" cores";
+            setImage(drawImage());
+            SwingUtilities.invokeLater(() -> {
+                mainPanel.getTextArea().setText(resposta);
+            });
+        };
+        SERVICE.submit(r);
     }
     
 }

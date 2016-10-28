@@ -9,6 +9,7 @@ import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
+import br.beholder.graph.core.util.VerticeUtils;
 import java.util.List;
 
 /**
@@ -29,8 +30,7 @@ public class ConectivityTest extends TestAlgorithm{
         {
             grafo.resetProperties();
             sa.search(vertice.getId(), -1);
-            if(!grafo.verificarVisitados())
-            {
+            if(!grafo.verificarVisitados()){
                 return false;
             }
         }

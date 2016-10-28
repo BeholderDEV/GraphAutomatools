@@ -177,6 +177,11 @@ public class Grafo {
         return eu;
     }
     
+    public void resetAll(){
+        resetAnteriores();
+        resetProperties();
+    }
+    
     public void resetProperties(){
         for (Vertice vertice : vertices) {
             vertice.setVisitado(false);

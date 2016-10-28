@@ -8,11 +8,6 @@ package br.beholder.graph.core.util;
 import com.bethecoder.ascii_table.ASCIITable;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
-import de.vandermeer.asciitable.v2.RenderedTable;
-import de.vandermeer.asciitable.v2.V2_AsciiTable;
-import de.vandermeer.asciitable.v2.render.V2_AsciiTableRenderer;
-import de.vandermeer.asciitable.v2.render.WidthAbsoluteEven;
-import de.vandermeer.asciitable.v2.themes.V2_E_TableThemes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,11 +20,11 @@ import java.util.List;
 public class VerticeUtils {
     
     public static String verticeListToString(List<Vertice> vertices){
-        String out = "";
-        for (Vertice vertice : vertices) {
-            out = out.concat(vertice.getRotulo()+" - ");
-        }
-        return out;
+        StringBuilder out = new StringBuilder();
+        vertices.stream().forEach((vertice) -> {
+            out.append(vertice.getRotulo()).append(" - ");
+        });
+        return out.toString();
     }
     
     public static List<Vertice> getVerticesPath(Vertice vertice){
@@ -45,46 +40,45 @@ public class VerticeUtils {
     }
     
     public static String getPath(Grafo grafo, Vertice vertice, int idProcurado){
-        String resposta = "";
-        String path="";
-        List<Vertice> vertices = new ArrayList<>();        
+        StringBuilder resposta = new StringBuilder();
+        StringBuilder path= new StringBuilder();
+        List<Vertice> vertices;      
         if(vertice==null)
         {
            if(grafo.hasVertice(idProcurado)){
-               resposta = resposta.concat("Vertice encontrado, porém não há Caminho possível para o Vertice");
+               resposta.append("Vertice encontrado, porém não há Caminho possível para o Vertice");
            }
-           else
-           {
-             resposta =  resposta.concat("Vertice não encontrado");  
+           else{
+               resposta.append("Vertice não encontrado");  
            }
         }
         else
         {
-           resposta = "Vertice encontrado \n\nCaminho: \n";
+           resposta.append("Vertice encontrado \n\nCaminho: \n");
            vertices = VerticeUtils.getVerticesPath(vertice);
            double peso = 0;
             for (Vertice vertice1 : vertices) {
-                path = path.concat(vertice1.getRotulo()+" - ");
+                path.append(vertice1.getRotulo()).append(" - ");
                 if(vertice1.getAnterior()!= null && vertice1!= null)
                 {
                     peso += grafo.getAresta(vertice1.getAnterior().getId(),vertice1.getId()).getPeso();
                 }               
             }
+            path.setLength(path.length()-3);
             
-            path = path.substring(0, path.length()-3);
             
-            path = path.concat("\n\nPesquisa:\n");
-            for (Vertice vertice1 : grafo.getVisitados()) {
-                path = path.concat(vertice1.getRotulo()+" - ");
-            }
-            path = path.substring(0, path.length()-3);
-            path = path.concat("\n\nTamanho do Caminho:\n"+(vertices.size()-1));
-            path = path.concat("\nPeso do Caminho:\n"+peso);
+            path.append("\n\nPesquisa:\n");
+            grafo.getVisitados().stream().forEach((vertice1) -> {
+                path.append(vertice1.getRotulo()).append(" - ");
+            });
+            path.setLength(path.length()-3);
+            path.append("\n\nTamanho do Caminho:\n").append(vertices.size()-1);
+            path.append("\nPeso do Caminho:\n").append(peso);
             
         }
         
-        resposta = resposta.concat(path);
-        return resposta;
+        resposta = resposta.append(path);
+        return resposta.toString();
     }
     
     public static String getTabelaCustos(Grafo grafo)

@@ -29,7 +29,6 @@ import br.beholder.graph.ui.window.OutsidePanel;
  */
 public class Lancador {
     
-    private static final ExecutorService service = Executors.newCachedThreadPool();
     private static JFrame frame = new JFrame();
     private static Dimension older_size;
     private static boolean maximazed=false;
@@ -105,13 +104,7 @@ public class Lancador {
         });
     }
 
-    
     public static Lancador getInstance(){
         return application;
-    }
-    
-    public void performAsynchronousTask(Runnable task)
-    {
-        service.submit(task);
     }
 }
