@@ -24,6 +24,7 @@ public class Coloring {
     private final MainPanelController controller;
     boolean animated = true;
     int delay = 1000;
+    boolean dirigido;
     
     public Coloring(Grafo grafo, MainPanelController controller) {
         this.grafo = grafo;
@@ -81,7 +82,9 @@ public class Coloring {
                     break;
                 }
                 if(animated){
+                    grafo.setDirigido(dirigido);
                     controller.renderColoration(verticeAtual.getId());
+                    grafo.setDirigido(false);
                     try {
                         Thread.sleep(delay);
                     } catch (InterruptedException ex) {
@@ -96,13 +99,17 @@ public class Coloring {
     }
     
     public int colorGraph(boolean animated, int delay){
+        dirigido=grafo.isDirigido();
+        grafo.setDirigido(false);
         this.animated = animated;
         this.delay = delay;
         int NumeroCores = 1;
         Vertice maiorGrau  = grafo.getVerticeMaiorGrau();
         maiorGrau.setCor(grafo.getCorNumero(0));
         if(animated){
+            grafo.setDirigido(dirigido);
             controller.renderColoration(maiorGrau.getId());
+            grafo.setDirigido(false);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
@@ -119,7 +126,9 @@ public class Coloring {
                 NumeroCores++;
                 verticeAtual.setCor(grafo.getCorNumero(NumeroCores-1));
                 if(animated){
+                    grafo.setDirigido(dirigido);
                     controller.renderColoration(verticeAtual.getId());
+                    grafo.setDirigido(false);
                     try {
                         Thread.sleep(delay);
                     } catch (InterruptedException ex) {
@@ -132,6 +141,7 @@ public class Coloring {
             }
             
         }
+        grafo.setDirigido(dirigido);
         return NumeroCores;
     }
     
