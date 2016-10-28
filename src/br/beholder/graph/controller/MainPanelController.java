@@ -75,6 +75,7 @@ public class MainPanelController {
     
     public void search(){
         mainPanel.setbuttonsEnabled(false);
+        mainPanel.getTextArea().setText("");
         Runnable r = () -> {
             if(grafo!=null){
                 grafo.resetAll();
@@ -108,6 +109,7 @@ public class MainPanelController {
     
     public void conectividade(){
         mainPanel.setbuttonsEnabled(false);
+        mainPanel.getTextArea().setText("");
         Runnable r = () -> {
             grafo.resetAll();
             String resposta = (grafo.isConexo()) ? "Grafo Conexo":"Grafo Desconexo";
@@ -121,6 +123,7 @@ public class MainPanelController {
     
     public void planaridade(){
         mainPanel.setbuttonsEnabled(false);
+        mainPanel.getTextArea().setText("");
         Runnable r = () -> {
             grafo.resetAll();
             String resposta = (grafo.isPlanar()) ? "Grafo Planar":"Grafo não Planar";
@@ -138,6 +141,7 @@ public class MainPanelController {
     
     public void coloracao() {
         mainPanel.setbuttonsEnabled(false);
+        mainPanel.getTextArea().setText("");
         Runnable r = () -> {
             grafo.resetAll();
             coloracao =  new Coloring(grafo, this);
