@@ -60,7 +60,11 @@ public class MainPanelController {
     
     private Image drawImage(){
         drawer = new GraphDrawer(grafo);
-        return drawer.drawGraph();
+        return drawer.drawGraph(-1);
+    }
+    private Image drawHintedImage(int hintedID){
+        drawer = new GraphDrawer(grafo);
+        return drawer.drawGraph(hintedID);
     }
     
     public void readXML(){
@@ -122,8 +126,8 @@ public class MainPanelController {
         SERVICE.submit(r);
     }
     
-    public void renderColoration(){
-        setImage(drawImage());
+    public void renderColoration(int hintedID){
+        setImage(drawHintedImage(hintedID));
     }
     
     public void coloracao() {

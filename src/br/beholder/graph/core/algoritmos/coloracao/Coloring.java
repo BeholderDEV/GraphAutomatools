@@ -22,6 +22,8 @@ public class Coloring {
     private final Grafo grafo;
     private int ultimaCor;
     private final MainPanelController controller;
+    boolean animated = true;
+    int delay = 1000;
     
     public Coloring(Grafo grafo, MainPanelController controller) {
         this.grafo = grafo;
@@ -78,6 +80,14 @@ public class Coloring {
                     corValida = false;
                     break;
                 }
+                if(animated){
+                    controller.renderColoration(verticeAtual.getId());
+                    try {
+                        Thread.sleep(delay);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
             if(corValida){
                 break;
@@ -86,8 +96,19 @@ public class Coloring {
     }
     
     public int colorGraph(boolean animated, int delay){
+        this.animated = animated;
+        this.delay = delay;
         int NumeroCores = 1;
-        grafo.getVerticeMaiorGrau().setCor(grafo.getCorNumero(0));
+        Vertice maiorGrau  = grafo.getVerticeMaiorGrau();
+        maiorGrau.setCor(grafo.getCorNumero(0));
+        if(animated){
+            controller.renderColoration(maiorGrau.getId());
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         Vertice verticeAtual;
         while(true){
             verticeAtual = getVerticeHigherSaturation();
@@ -97,17 +118,19 @@ public class Coloring {
             if(ultimaCor == NumeroCores){
                 NumeroCores++;
                 verticeAtual.setCor(grafo.getCorNumero(NumeroCores-1));
+                if(animated){
+                    controller.renderColoration(verticeAtual.getId());
+                    try {
+                        Thread.sleep(delay);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
             }else{
                 doNewColor(verticeAtual, NumeroCores);
             }
-            if(animated){
-                controller.renderColoration();
-                try {
-                    Thread.sleep(delay);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            
         }
         return NumeroCores;
     }

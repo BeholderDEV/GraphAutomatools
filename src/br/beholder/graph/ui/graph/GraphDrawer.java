@@ -35,7 +35,7 @@ public class GraphDrawer {
     }
     
     
-    public Image drawGraph(){
+    public Image drawGraph(int hintedID){
         Point minvert = new Point();
         Point maxvert = new Point();
         Point centervert = new Point();
@@ -104,6 +104,9 @@ public class GraphDrawer {
             }
             gd.fillOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
             gd.setColor(ColorController.COR_LETRA);
+            if(hintedID==fork.getId()){
+                gd.setColor(fork.getCor());
+            }            
             gd.drawOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
 
             gd.setColor(ColorController.FUNDO_MEDIO);
