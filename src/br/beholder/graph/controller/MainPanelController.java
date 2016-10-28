@@ -74,6 +74,7 @@ public class MainPanelController {
     
     
     public void search(){
+        mainPanel.setbuttonsEnabled(false);
         Runnable r = () -> {
             if(grafo!=null){
                 grafo.resetAll();
@@ -87,9 +88,6 @@ public class MainPanelController {
                     path.append(VerticeUtils.getTabelaCustos(grafo));
                 }
                 String resposta = path.toString();
-                SwingUtilities.invokeLater(() -> {
-                    mainPanel.getTextArea().setText(resposta);
-                });
                 if(vertice!=null){
                     while(vertice.getAnterior()!=null)
                     {
@@ -98,6 +96,10 @@ public class MainPanelController {
                         vertice = vertice.getAnterior();
                     }
                 }
+                SwingUtilities.invokeLater(() -> {
+                    mainPanel.getTextArea().setText(resposta);
+                    mainPanel.setbuttonsEnabled(true);
+                });
                 setImage(drawImage());
             }
         };
@@ -105,22 +107,26 @@ public class MainPanelController {
     }
     
     public void conectividade(){
+        mainPanel.setbuttonsEnabled(false);
         Runnable r = () -> {
             grafo.resetAll();
             String resposta = (grafo.isConexo()) ? "Grafo Conexo":"Grafo Desconexo";
             SwingUtilities.invokeLater(() -> {
                 mainPanel.getTextArea().setText(resposta);
+                mainPanel.setbuttonsEnabled(true);
             });
         };
         SERVICE.submit(r);
     }
     
     public void planaridade(){
+        mainPanel.setbuttonsEnabled(false);
         Runnable r = () -> {
             grafo.resetAll();
             String resposta = (grafo.isPlanar()) ? "Grafo Planar":"Grafo não Planar";
             SwingUtilities.invokeLater(() -> {
                 mainPanel.getTextArea().setText(resposta);
+                mainPanel.setbuttonsEnabled(true);
             });
         };
         SERVICE.submit(r);
@@ -131,6 +137,7 @@ public class MainPanelController {
     }
     
     public void coloracao() {
+        mainPanel.setbuttonsEnabled(false);
         Runnable r = () -> {
             grafo.resetAll();
             coloracao =  new Coloring(grafo, this);
@@ -138,6 +145,7 @@ public class MainPanelController {
             setImage(drawImage());
             SwingUtilities.invokeLater(() -> {
                 mainPanel.getTextArea().setText(resposta);
+                mainPanel.setbuttonsEnabled(true);
             });
         };
         SERVICE.submit(r);

@@ -7,7 +7,6 @@ package br.beholder.graph.ui;
 
 import br.beholder.graph.controller.MainPanelController;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
-import br.beholder.graph.core.model.Vertice;
 import br.beholder.graph.ui.utils.ColorController;
 import br.beholder.graph.ui.webLaf.WeblafUtils;
 import javax.swing.JPanel;
@@ -18,7 +17,8 @@ import javax.swing.JTextArea;
  * @author lite
  */
 public class MainPanel extends javax.swing.JPanel {
-    MainPanelController controller;
+    private MainPanelController controller;
+    private boolean buttonsEnabled;
     /**
      * Creates new form MainPanel
      */
@@ -44,7 +44,20 @@ public class MainPanel extends javax.swing.JPanel {
         jLabel1.setForeground(ColorController.COR_LETRA);
         jLabel2.setForeground(ColorController.COR_LETRA);
     }
-    
+
+    public boolean isbuttonsEnabled() {
+        return buttonsEnabled;
+    }
+
+    public void setbuttonsEnabled(boolean buttonsBlocked) {
+        this.buttonsEnabled = buttonsBlocked;
+        webButton1.setEnabled(buttonsBlocked);
+        webButton4.setEnabled(buttonsBlocked);
+        webButton5.setEnabled(buttonsBlocked);
+        webButton6.setEnabled(buttonsBlocked);
+        webButton7.setEnabled(buttonsBlocked);
+    }
+        
     public JPanel getImagePanel(){
         return imagePanel;
     }
