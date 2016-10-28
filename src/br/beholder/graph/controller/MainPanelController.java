@@ -122,11 +122,15 @@ public class MainPanelController {
         SERVICE.submit(r);
     }
     
+    public void renderColoration(){
+        setImage(drawImage());
+    }
+    
     public void coloracao() {
         Runnable r = () -> {
             grafo.resetAll();
-            coloracao =  new Coloring(grafo);
-            String resposta = "Usa-se "+coloracao.ColorGraph()+" cores";
+            coloracao =  new Coloring(grafo, this);
+            String resposta = "Usa-se "+coloracao.colorGraph(true,Integer.parseInt(mainPanel.getDelay()))+" cores";
             setImage(drawImage());
             SwingUtilities.invokeLater(() -> {
                 mainPanel.getTextArea().setText(resposta);

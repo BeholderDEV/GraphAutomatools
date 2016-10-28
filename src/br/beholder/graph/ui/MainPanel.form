@@ -138,6 +138,11 @@
             <Property name="alignment" type="int" value="2"/>
           </Layout>
           <SubComponents>
+            <Component class="javax.swing.JTextField" name="delayField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1000"/>
+              </Properties>
+            </Component>
             <Component class="com.alee.laf.button.WebButton" name="webButton7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Colorir"/>
@@ -206,7 +211,7 @@
             <Container class="javax.swing.JSplitPane" name="jSplitPane1">
               <Properties>
                 <Property name="orientation" type="int" value="0"/>
-                <Property name="resizeWeight" type="double" value="0.75"/>
+                <Property name="resizeWeight" type="double" value="0.9"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

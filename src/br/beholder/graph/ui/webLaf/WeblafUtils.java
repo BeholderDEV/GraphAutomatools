@@ -11,7 +11,6 @@ import com.alee.laf.combobox.WebComboBoxUI;
 import com.alee.laf.panel.WebPanelUI;
 import com.alee.laf.scroll.WebScrollBarUI;
 import com.alee.laf.scroll.WebScrollPaneUI;
-import com.alee.laf.text.WebTextAreaUI;
 import com.alee.laf.text.WebTextFieldUI;
 import com.alee.laf.toolbar.WebToolBarUI;
 import com.alee.managers.style.skin.web.WebDecorationPainter;
@@ -28,6 +27,8 @@ import java.util.Locale;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import br.beholder.graph.ui.utils.ColorController;
+import com.alee.laf.spinner.WebSpinnerUI;
+import com.alee.laf.table.editors.WebNumberEditor;
 
 /**
  *
@@ -59,6 +60,20 @@ public class WeblafUtils {
         }
     }
     
+    public static void configuraWebLaf(WebComboBox field, int margin) {
+       if (!WeblafUtils.weblafEstaInstalado()) {
+           return;
+       }
+       ((WebComboBoxUI) field.getUI()).setDrawBorder(false);
+       ((WebComboBoxUI) field.getUI()).setRound(0);
+       ((WebComboBoxUI) field.getUI()).setExpandedBgColor(ColorController.COR_PRINCIPAL);
+       ((WebComboBoxUI) field.getUI()).setWebColoredBackground(false);
+       ((WebComboBoxUI) field.getUI()).setShadeWidth(0);
+       field.setBorder(new EmptyBorder(margin,margin,margin,margin));
+       field.setOpaque(true);
+       field.setBackground(ColorController.COR_DESTAQUE);
+       field.setForeground(ColorController.FUNDO_ESCURO);
+    }
     public static void configuraWebLaf(WebComboBox field) {
        if (!WeblafUtils.weblafEstaInstalado()) {
            return;
@@ -68,11 +83,10 @@ public class WeblafUtils {
        ((WebComboBoxUI) field.getUI()).setExpandedBgColor(ColorController.COR_DESTAQUE);
        ((WebComboBoxUI) field.getUI()).setWebColoredBackground(false);
 //       ((WebComboBoxUI) field.getUI()).s 
-       
-//       field.setBorder(new EmptyBorder(15,15,15,15));
-//       field.setOpaque(true);
-//       field.setBackground(ColorController.COR_DESTAQUE);
-//       field.setForeground(ColorController.FUNDO_ESCURO);
+       field.setBorder(new EmptyBorder(10,10,10,10));
+       field.setOpaque(true);
+       field.setBackground(ColorController.COR_DESTAQUE);
+       field.setForeground(ColorController.FUNDO_ESCURO);
     }
     public static void configuraWebLaf(JTextArea field) {
        if (!WeblafUtils.weblafEstaInstalado()) {
@@ -95,6 +109,40 @@ public class WeblafUtils {
        field.setOpaque(true);
        field.setBackground(ColorController.COR_DESTAQUE);
        field.setForeground(ColorController.COR_LETRA);
+    }
+    public static void configuraWebLaf(JTextField field, int margin) {
+       if (!WeblafUtils.weblafEstaInstalado()) {
+           return;
+       }
+       ((WebTextFieldUI) field.getUI()).setDrawBorder(false);
+       ((WebTextFieldUI) field.getUI()).setDrawBackground(true);
+       field.setBorder(new EmptyBorder(margin,margin,margin,margin));
+       field.setOpaque(true);
+       field.setBackground(ColorController.COR_DESTAQUE);
+       field.setForeground(ColorController.COR_LETRA);
+    }
+    public static void configuraWebLaf(JSpinner.NumberEditor field, int margin) {
+       if (!WeblafUtils.weblafEstaInstalado()) {
+           return;
+       }
+       field.setBorder(new EmptyBorder(margin,margin,margin,margin));
+       field.setOpaque(true);
+       field.setBackground(ColorController.COR_DESTAQUE);
+       field.setForeground(ColorController.COR_LETRA);
+    }
+    public static void configuraWebLaf(JSpinner field, int margin) {
+       if (!WeblafUtils.weblafEstaInstalado()) {
+           return;
+       }
+       ((WebSpinnerUI) field.getUI()).setDrawBorder(false);
+       ((WebSpinnerUI) field.getUI()).setShadeWidth(0);
+       ((WebSpinnerUI) field.getUI()).setRound(0);
+       field.setOpaque(true);
+       field.setBorder(new EmptyBorder(margin, margin, margin, margin));
+       field.setBackground(ColorController.COR_DESTAQUE);
+       field.setForeground(ColorController.COR_LETRA);
+       JSpinner.NumberEditor editor = (JSpinner.NumberEditor) field.getEditor();
+       configuraWebLaf(editor, 0);
     }
     
     public static void configuraWebLaf(JCheckBox field) {

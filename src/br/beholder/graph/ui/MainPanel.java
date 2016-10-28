@@ -33,7 +33,8 @@ public class MainPanel extends javax.swing.JPanel {
         WeblafUtils.configuraWebLaf(jTextField1);
         WeblafUtils.configuraWebLaf(jTextField2);
         WeblafUtils.configuraWebLaf(jTextArea1);
-        WeblafUtils.configuraWebLaf(searchMethodChooser);
+        WeblafUtils.configuraWebLaf(delayField,10);
+        WeblafUtils.configuraWebLaf(searchMethodChooser ,7);
         WeblafUtils.configurarBotao(webButton1);
         WeblafUtils.configurarBotao(webButton4);
         WeblafUtils.configurarBotao(webButton5);
@@ -49,6 +50,10 @@ public class MainPanel extends javax.swing.JPanel {
     }
     public JTextArea getTextArea(){
         return jTextArea1;
+    }
+    
+    public String getDelay(){
+        return delayField.getText();
     }
     
     public String getIDVerticeInicial(){
@@ -91,6 +96,7 @@ public class MainPanel extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        delayField = new javax.swing.JTextField();
         webButton7 = new com.alee.laf.button.WebButton();
         webButton6 = new com.alee.laf.button.WebButton();
         webButton5 = new com.alee.laf.button.WebButton();
@@ -150,6 +156,9 @@ public class MainPanel extends javax.swing.JPanel {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
+        delayField.setText("1000");
+        jPanel3.add(delayField);
+
         webButton7.setText("Colorir");
         webButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +208,7 @@ public class MainPanel extends javax.swing.JPanel {
         jPanel7.setLayout(new java.awt.BorderLayout());
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setResizeWeight(0.75);
+        jSplitPane1.setResizeWeight(0.9);
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(166, 175));
 
@@ -251,6 +260,7 @@ public class MainPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField delayField;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

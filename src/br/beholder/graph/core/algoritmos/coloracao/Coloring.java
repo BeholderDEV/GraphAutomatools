@@ -5,11 +5,14 @@
  */
 package br.beholder.graph.core.algoritmos.coloracao;
 
+import br.beholder.graph.controller.MainPanelController;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,9 +21,12 @@ import java.util.List;
 public class Coloring {
     private final Grafo grafo;
     private int ultimaCor;
+    private final MainPanelController controller;
     
-    public Coloring(Grafo grafo) {
+    public Coloring(Grafo grafo, MainPanelController controller) {
         this.grafo = grafo;
+        this.controller = controller;
+        
     }
     
     private boolean verificarCoresVizinhas(List<Color> cores, Color corVizinho){
@@ -79,7 +85,7 @@ public class Coloring {
         }
     }
     
-    public int ColorGraph(){
+    public int colorGraph(boolean animated, int delay){
         int NumeroCores = 1;
         grafo.getVerticeMaiorGrau().setCor(grafo.getCorNumero(0));
         Vertice verticeAtual;
@@ -93,6 +99,14 @@ public class Coloring {
                 verticeAtual.setCor(grafo.getCorNumero(NumeroCores-1));
             }else{
                 doNewColor(verticeAtual, NumeroCores);
+            }
+            if(animated){
+                controller.renderColoration();
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         return NumeroCores;
