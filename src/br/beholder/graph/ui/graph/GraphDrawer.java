@@ -102,6 +102,9 @@ public class GraphDrawer {
             {
                 gd.setColor(fork.getCor());
             }
+            if(hintedID!=-1 && fork.getCor()==null){
+                gd.setColor(ColorController.FUNDO_ESCURO);
+            }
             gd.fillOval(fork.getPosition().x-nodeSize/2, fork.getPosition().y-nodeSize/2, nodeSize, nodeSize);
             gd.setColor(ColorController.COR_LETRA);
             if(hintedID==fork.getId()){

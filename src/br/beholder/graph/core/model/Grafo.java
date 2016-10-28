@@ -7,8 +7,6 @@ package br.beholder.graph.core.model;
 
 import br.beholder.graph.core.algoritmos.test.ConectivityTest;
 import br.beholder.graph.core.algoritmos.test.PlanarityTest;
-import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
-import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
 import br.beholder.graph.core.algoritmos.test.TestAlgorithm;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -34,15 +32,19 @@ public class Grafo {
         visitados = new ArrayList<>();
         vertices = new ArrayList<>();
         arestas = new ArrayList<>();
+        lista_cores.add(new Color(255, 192, 85));  
+        lista_cores.add(new Color(232, 78, 80));  
+        lista_cores.add(new Color(147, 98, 255)); 
         lista_cores.add(new Color(26, 188, 156));
-        lista_cores.add(new Color(230, 126, 34));  
-        lista_cores.add(new Color(155, 89, 182));  
-        lista_cores.add(new Color(231, 76, 60));
-        lista_cores.add(new Color(241, 196, 15));  
-        lista_cores.add(new Color(192, 57, 43));  
-        lista_cores.add(new Color(52, 152, 219));
-        lista_cores.add(new Color(46, 204, 113));  
-        lista_cores.add(new Color(52, 73, 94));  
+        lista_cores.add(new Color(78, 214, 232));
+        lista_cores.add(new Color(73, 232, 62));
+        lista_cores.add(new Color(255, 212, 50));
+        lista_cores.add(new Color(232, 75, 48));
+        lista_cores.add(new Color(69, 125, 255));
+        lista_cores.add(new Color(178, 67, 255));
+        
+        lista_cores.add(Color.MAGENTA);  
+        lista_cores.add(Color.YELLOW);  
         
     }
 

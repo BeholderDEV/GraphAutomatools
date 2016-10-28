@@ -54,7 +54,7 @@ public class Coloring {
             }
             if(grauAtual >= maiorGrau){
                 if(maiorGrau != 0 && grauAtual == maiorGrau){
-                    if(v.getId() == id){
+                    if(v.getRotulo().compareTo(grafo.getVertice(id).getRotulo())>0){
                         continue;
                     }
                 }

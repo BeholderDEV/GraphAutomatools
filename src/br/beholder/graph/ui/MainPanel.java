@@ -169,7 +169,7 @@ public class MainPanel extends javax.swing.JPanel {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        delayField.setText("1000");
+        delayField.setText("300");
         jPanel3.add(delayField);
 
         webButton7.setText("Colorir");
