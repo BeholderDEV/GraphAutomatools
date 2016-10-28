@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Grafo ponderado="false" dirigido="false">
+	<Vertices>
+		<!-- relId indica o índice do vértice na matriz de adjacências-->
+		<Vertice relId="0" rotulo="A" posX="412" posY="110"/>
+		<Vertice relId="1" rotulo="B" posX="556" posY="63"/>
+		<Vertice relId="2" rotulo="C" posX="780" posY="57"/>
+		<Vertice relId="3" rotulo="D" posX="890" posY="158"/>
+		<Vertice relId="4" rotulo="E" posX="838" posY="391"/>
+		<Vertice relId="5" rotulo="F" posX="654" posY="436"/>
+		<Vertice relId="6" rotulo="G" posX="459" posY="380"/>
+		<Vertice relId="7" rotulo="H" posX="384" posY="246"/>
+	</Vertices>
+	<Arestas>
+		<Aresta idVertice1="0" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="0" idVertice2="3" peso="1.0"/>
+		<Aresta idVertice1="0" idVertice2="4" peso="1.0"/>
+		<Aresta idVertice1="0" idVertice2="5" peso="1.0"/>
+		<Aresta idVertice1="0" idVertice2="6" peso="1.0"/>
+		<Aresta idVertice1="0" idVertice2="7" peso="1.0"/>
+		<Aresta idVertice1="1" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="1" idVertice2="3" peso="1.0"/>
+		<Aresta idVertice1="1" idVertice2="4" peso="1.0"/>
+		<Aresta idVertice1="1" idVertice2="5" peso="1.0"/>
+		<Aresta idVertice1="1" idVertice2="6" peso="1.0"/>
+		<Aresta idVertice1="1" idVertice2="7" peso="1.0"/>
+		<Aresta idVertice1="1" idVertice2="0" peso="1.0"/>
+		<Aresta idVertice1="3" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="4" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="4" idVertice2="3" peso="1.0"/>
+		<Aresta idVertice1="5" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="5" idVertice2="3" peso="1.0"/>
+		<Aresta idVertice1="5" idVertice2="4" peso="1.0"/>
+		<Aresta idVertice1="6" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="6" idVertice2="3" peso="1.0"/>
+		<Aresta idVertice1="6" idVertice2="5" peso="1.0"/>
+		<Aresta idVertice1="6" idVertice2="4" peso="1.0"/>
+		<Aresta idVertice1="7" idVertice2="2" peso="1.0"/>
+		<Aresta idVertice1="7" idVertice2="3" peso="1.0"/>
+		<Aresta idVertice1="7" idVertice2="4" peso="1.0"/>
+		<Aresta idVertice1="7" idVertice2="5" peso="1.0"/>
+		<Aresta idVertice1="7" idVertice2="6" peso="1.0"/>
+	</Arestas>
+</Grafo>

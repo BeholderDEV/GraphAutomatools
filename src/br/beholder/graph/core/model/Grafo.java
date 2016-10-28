@@ -38,13 +38,21 @@ public class Grafo {
         lista_cores.add(new Color(26, 188, 156));
         lista_cores.add(new Color(78, 214, 232));
         lista_cores.add(new Color(73, 232, 62));
-        lista_cores.add(new Color(255, 212, 50));
-        lista_cores.add(new Color(232, 75, 48));
+        lista_cores.add(new Color(220, 112, 80));
+        lista_cores.add(new Color(150, 55, 28));
         lista_cores.add(new Color(69, 125, 255));
         lista_cores.add(new Color(178, 67, 255));
-        
-        lista_cores.add(Color.MAGENTA);  
-        lista_cores.add(Color.YELLOW);  
+        lista_cores.add(new Color(135, 195, 110));
+        lista_cores.add(new Color(220 , 196, 57));
+        lista_cores.add(Color.MAGENTA); 
+        lista_cores.add(Color.PINK);  
+        lista_cores.add(Color.BLUE);  
+        lista_cores.add(Color.LIGHT_GRAY);
+        lista_cores.add(new Color(98, 196, 98));
+        lista_cores.add(new Color(15, 63, 118));
+        lista_cores.add(new Color(96, 125, 139));
+        lista_cores.add(new Color(121, 85, 72));
+        lista_cores.add(new Color(205, 220, 57));
         
     }
 
