@@ -29,6 +29,7 @@ public class MainPanelController {
     MainPanel mainPanel;
     private Grafo grafo;
     GraphDrawer drawer;
+    Coloring coloracao;
 
     public MainPanelController(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
@@ -95,18 +96,21 @@ public class MainPanelController {
     }
     
     public void conectividade(){
+        grafo.resetProperties();
         String resposta = (grafo.isConexo()) ? "Grafo Conexo":"Grafo Desconexo";
         mainPanel.getTextArea().setText(resposta);
     }
     
     public void planaridade(){
+        grafo.resetProperties();
         String resposta = (grafo.isPlanar()) ? "Grafo Planar":"Grafo não Planar";
         mainPanel.getTextArea().setText(resposta);
     }
     
     public void coloracao()
     {
-        Coloring coloracao =  new Coloring(grafo);        
+        grafo.resetProperties();
+        coloracao =  new Coloring(grafo);
         String resposta = "Usa-se "+coloracao.ColorGraph()+" cores";
         mainPanel.getTextArea().setText(resposta);
         setImage(drawImage());

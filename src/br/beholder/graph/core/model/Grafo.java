@@ -21,14 +21,14 @@ import java.util.List;
  * @author lite
  */
 public class Grafo {
-    private List<Vertice> vertices;
+    private final List<Vertice> vertices;
     private List<Vertice> visitados;
-    private List<Aresta> arestas;
+    private final List<Aresta> arestas;
     private Boolean ponderado = false;
     private Boolean dirigido = false;
-    private TestAlgorithm planar = new PlanarityTest(this);
-    private TestAlgorithm conexo = new ConectivityTest(this);
-    private List<Color> lista_cores = new ArrayList<>();
+    private final TestAlgorithm planar = new PlanarityTest(this);
+    private final TestAlgorithm conexo = new ConectivityTest(this);
+    private final List<Color> lista_cores = new ArrayList<>();
     
     public Grafo() {
         visitados = new ArrayList<>();
@@ -181,11 +181,13 @@ public class Grafo {
         for (Vertice vertice : vertices) {
             vertice.setVisitado(false);
             vertice.setCusto(-1d);
+            vertice.setCor(null);
         }
         for (Aresta aresta : arestas) {
             aresta.setHinted(false);
         }
         visitados = new ArrayList<>();
+        System.gc();
     }
     
     public void resetAnteriores(){
