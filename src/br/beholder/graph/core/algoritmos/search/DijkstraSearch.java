@@ -39,7 +39,7 @@ public class DijkstraSearch extends SearchAlgorithm{
                     vertices.add(vizinho);
                 }
             }
-            if(grafo.verificarVisitados()){
+            if(grafo.todosForamVisitados()){
                 break;
             }
         }

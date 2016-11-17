@@ -30,7 +30,7 @@ public class ConectivityTest extends TestAlgorithm{
         {
             grafo.resetProperties();
             sa.search(vertice.getId(), -1);
-            if(!grafo.verificarVisitados()){
+            if(!grafo.todosForamVisitados()){
                 return false;
             }
         }

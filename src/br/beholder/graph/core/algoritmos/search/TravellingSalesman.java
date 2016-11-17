@@ -1,93 +1,115 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.Stack;
- 
-public class TravellingSalesman
-{
-    private int numberOfNodes;
-    private Stack<Integer> stack;
- 
-    public TravellingSalesman()
-    {
-        stack = new Stack<Integer>();
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.beholder.graph.core.algoritmos.search;
+
+import br.beholder.graph.core.model.Aresta;
+import br.beholder.graph.core.model.Grafo;
+import br.beholder.graph.core.model.Vertice;
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Adson Estevesa
+ */
+public class TravellingSalesman {
+    
+    private Grafo grafo;
+
+    public TravellingSalesman(Grafo grafo) {
+    
+        this.grafo=grafo;
     }
- 
-    public void tsp(int adjacencyMatrix[][])
+    
+    public Grafo find_path()
     {
-        numberOfNodes = adjacencyMatrix[1].length - 1;
-        int[] visited = new int[numberOfNodes + 1];
-        visited[1] = 1;
-        stack.push(1);
-        int element, dst = 0, i;
-        int min = Integer.MAX_VALUE;
-        boolean minFlag = false;
-        System.out.print(1 + "\t");
- 
-        while (!stack.isEmpty())
+        List<Aresta> escolhidos = null;
+        List<Vertice> possiveis = new ArrayList<>();
+        menor_Aresta();
+        
+        while(!grafo.todosForamVisitados())
         {
-            element = stack.peek();
-            i = 1;
-            min = Integer.MAX_VALUE;
-            while (i <= numberOfNodes)
-            {
-                if (adjacencyMatrix[element][i] > 1 && visited[i] == 0)
-                {
-                    if (min > adjacencyMatrix[element][i])
+            escolhidos = caminhosJaEscolhidos();
+            for (Aresta escolhido : escolhidos) {
+//                possiveis.addAll(vizinhosDeAmbos(escolhido.getVertice1(), escolhido.getVertice2()));
+                for (Vertice vertice : grafo.getVertices()) {
+                    List<Vertice> vizinhos = grafo.getVizinhos(vertice);
+                    if(vizinhos.contains(escolhido.getVertice1()) && vizinhos.contains(escolhido.getVertice2()))
                     {
-                        min = adjacencyMatrix[element][i];
-                        dst = i;
-                        minFlag = true;
+                        vertice.setCusto(grafo.getAresta(vertice.getId(), escolhido.getVertice1().getId()).getPeso()+grafo.getAresta(vertice.getId(), escolhido.getVertice2().getId()).getPeso());
+                        vertice.setArestaColocavel(escolhido);
+                        possiveis.add(vertice);
                     }
                 }
-                i++;
             }
-            if (minFlag)
-            {
-                visited[dst] = 1;
-                stack.push(dst);
-                System.out.print(dst + "\t");
-                minFlag = false;
-                continue;
+            Vertice menor = null;
+            for (Vertice possivel : possiveis) {
+                if(menor==null)
+                {
+                    menor=possivel;
+                }
+                else{
+                    if(menor.getCusto()>possivel.getCusto())
+                    {
+                        menor=possivel;
+                    }
+                }
             }
-            stack.pop();
         }
+        
+        return grafo;
     }
- 
-    public static void main(String... arg)
+    
+    public List<Vertice> vizinhosDeAmbos(Vertice vertice1, Vertice vertice2)
     {
-        int number_of_nodes;
-        Scanner scanner = null;
-        try
-        {
-            System.out.println("Enter the number of nodes in the graph");
-            scanner = new Scanner(System.in);
-            number_of_nodes = scanner.nextInt();
-            int adjacency_matrix[][] = new int[number_of_nodes + 1][number_of_nodes + 1];
-            System.out.println("Enter the adjacency matrix");
-            for (int i = 1; i <= number_of_nodes; i++)
+        List<Vertice> vizinhos_comum = new ArrayList<>();
+        
+        for (Vertice vertice : grafo.getVertices()) {
+            List<Vertice> vizinhos = grafo.getVizinhos(vertice);
+            if(vizinhos.contains(vertice1) && vizinhos.contains(vertice2))
             {
-                for (int j = 1; j <= number_of_nodes; j++)
-                {
-                    adjacency_matrix[i][j] = scanner.nextInt();
-                }
+                vertice.setCusto(grafo.getAresta(vertice.getId(), vertice1.getId()).getPeso()+grafo.getAresta(vertice.getId(), vertice2.getId()).getPeso());
+                vizinhos_comum.add(vertice);
             }
-            for (int i = 1; i <= number_of_nodes; i++)
-            {
-                for (int j = 1; j <= number_of_nodes; j++)
-                {
-                    if (adjacency_matrix[i][j] == 1 && adjacency_matrix[j][i] == 0)
-                    {
-                        adjacency_matrix[j][i] = 1;
-                    }
-                }
-            }
-            System.out.println("the citys are visited as follows");
-            TravellingSalesman tspNearestNeighbour = new TravellingSalesman();
-            tspNearestNeighbour.tsp(adjacency_matrix);
-        } catch (InputMismatchException inputMismatch)
-         {
-             System.out.println("Wrong Input format");
-         }
-        scanner.close();
+        }
+        return vizinhos_comum;
     }
+    
+    public List<Aresta> caminhosJaEscolhidos()
+    {
+        List<Aresta> escolhidos = new ArrayList<>();
+        
+        for (Aresta aresta : grafo.getArestas()) {
+            if(aresta.isHinted())
+            {
+                escolhidos.add(aresta);
+            }
+        }
+        return escolhidos;
+    }
+    
+    public void menor_Aresta()
+    {
+        Double menor = -1.0;
+        int num = -1;
+        for (Aresta aresta : grafo.getArestas()) {
+            num++;
+            if(menor==-1.0)
+            {
+                menor=aresta.getPeso();
+            }
+            else
+            {
+                if(menor>aresta.getPeso())
+                {
+                    menor=aresta.getPeso();
+                }
+            }
+        }
+        grafo.getArestas().get(num).setHinted(true);
+    }
+    
 }

@@ -15,6 +15,7 @@ import java.awt.Point;
  */
 public class Vertice {
     private final int id;
+    private Aresta arestaColocavel;
     private String rotulo;
     private Point position;
     boolean visitado = false;
@@ -92,5 +93,15 @@ public class Vertice {
 
     public void setGrau(Integer grau) {
         this.grau = grau;
-    }    
+    }   
+
+    public Aresta getArestaColocavel() {
+        return arestaColocavel;
+    }
+
+    public void setArestaColocavel(Aresta arestaColocavel) {
+        this.arestaColocavel = arestaColocavel;
+    }
+    
+    
 }

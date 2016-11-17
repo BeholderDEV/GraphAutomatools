@@ -156,6 +156,7 @@ public class Grafo {
         return vizinhos;
     }
     
+    
     public boolean hasVertice(int id){
         for (Vertice vertice : vertices) {
             if(vertice.getId()==id){
@@ -212,7 +213,7 @@ public class Grafo {
         }
     }
 
-    public boolean verificarVisitados() {
+    public boolean todosForamVisitados() {
         for(Vertice vertice : vertices){
             if(!vertice.isVisitado())
             {
