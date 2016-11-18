@@ -24,6 +24,7 @@ public class TravellingSalesman {
     private Grafo grafo;
     int delay = 1000;
     private final MainPanelController controller;
+    private boolean encontrou;
     public TravellingSalesman(Grafo grafo, MainPanelController controller) {
         this.controller = controller;
         this.grafo=grafo;
@@ -35,7 +36,8 @@ public class TravellingSalesman {
         menor_Aresta();
         boolean first = true;
         while(!grafo.todosForamVisitados())
-        {
+        {   
+            encontrou = false;
             List<Vertice> possiveis = new ArrayList<>();
             escolhidos = caminhosJaEscolhidos();
             for (Aresta escolhido : escolhidos) {
@@ -55,29 +57,33 @@ public class TravellingSalesman {
                         }                       
                         if(!possiveis.contains(vertice))
                         {
+                            encontrou = true;
                             possiveis.add(vertice);
                         }
                     }
                 }
+                
             }
-            Vertice menor = possiveis.get(0);
+            Vertice menor= null;
+            if(possiveis.size()>0){
+                menor = possiveis.get(0);
+            }else if(!grafo.todosForamVisitados()){
+                return -1.0;
+            }
+            
             for (Vertice possivel : possiveis) {
-                if(menor.getCusto()>possivel.getCusto())
-                {
+                if(menor.getCusto()>possivel.getCusto()){
                     menor=possivel;
                 }
-                else
-                {
+                else{
                     possivel.setCusto(-1.0);
                 }
             }
             
-            if(!first)
-            {
+            if(!first){
                 menor.getArestaColocavel().setHinted(false);
             }
-            else
-            {
+            else{
                 first=false;
             }            
             menor.getArestasSubstitutas()[0].setHinted(true);
@@ -90,8 +96,8 @@ public class TravellingSalesman {
                 Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
             }
             controller.renderColoration(1);
+            
         }
-        
         return pesodocaminho();
     }
     
