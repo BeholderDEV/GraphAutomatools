@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Grafo ponderado="true" dirigido="false">
+	<Vertices>
+		<!-- relId indica o índice do vértice na matriz de adjacências-->
+		<Vertice relId="0" rotulo="A" posX="46" posY="194"/>
+		<Vertice relId="1" rotulo="B" posX="406" posY="1"/>
+		<Vertice relId="2" rotulo="C" posX="595" posY="208"/>
+		<Vertice relId="3" rotulo="D" posX="615" posY="359"/>
+		<Vertice relId="4" rotulo="E" posX="470" posY="448"/>
+		<Vertice relId="5" rotulo="F" posX="165" posY="345"/>
+	</Vertices>
+	<Arestas>
+		<Aresta idVertice1="0" idVertice2="1" peso="29.0"/>
+		<Aresta idVertice1="0" idVertice2="2" peso="37.0"/>
+		<Aresta idVertice1="0" idVertice2="3" peso="24.0"/>
+		<Aresta idVertice1="0" idVertice2="4" peso="22.0"/>
+		<Aresta idVertice1="1" idVertice2="2" peso="20.0"/>
+		<Aresta idVertice1="1" idVertice2="3" peso="25.0"/>
+		<Aresta idVertice1="1" idVertice2="4" peso="31.0"/>
+		<Aresta idVertice1="1" idVertice2="5" peso="26.0"/>
+		<Aresta idVertice1="2" idVertice2="3" peso="14.0"/>
+		<Aresta idVertice1="2" idVertice2="4" peso="21.0"/>
+		<Aresta idVertice1="2" idVertice2="5" peso="28.0"/>
+		<Aresta idVertice1="3" idVertice2="4" peso="17.0"/>
+		<Aresta idVertice1="3" idVertice2="5" peso="15.0"/>
+		<Aresta idVertice1="4" idVertice2="5" peso="30.0"/>
+		<Aresta idVertice1="5" idVertice2="0" peso="19.0"/>
+	</Arestas>
+</Grafo>
