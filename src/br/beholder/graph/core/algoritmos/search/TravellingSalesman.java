@@ -89,7 +89,7 @@ public class TravellingSalesman {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
             }
-            controller.renderColoration(delay);
+            controller.renderColoration(1);
         }
         
         return pesodocaminho();

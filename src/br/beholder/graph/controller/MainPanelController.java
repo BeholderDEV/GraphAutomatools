@@ -157,7 +157,7 @@ public class MainPanelController {
         SERVICE.submit(r);
     }
     
-    public void CaixeiroViajante() {
+    public void caixeiroViajante() {
         mainPanel.setbuttonsEnabled(false);
         mainPanel.getTextArea().setText("");
         Runnable r = () -> {

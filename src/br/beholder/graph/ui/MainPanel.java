@@ -282,7 +282,7 @@ public class MainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_webButton7ActionPerformed
 
     private void webButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton8ActionPerformed
-        controller.CaixeiroViajante();
+        controller.caixeiroViajante();
     }//GEN-LAST:event_webButton8ActionPerformed
 
 

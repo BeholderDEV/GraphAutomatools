@@ -57,7 +57,11 @@ public class GraphDrawer {
             }
             else{
                 gd.setColor(ColorController.COR_LETRA);
+                if(hintedID!=-1){
+                    gd.setColor(ColorController.FUNDO_ESCURO);
+                }
             }
+            
             Point sw = edge.getVertice1().getPosition();
             Point ne = edge.getVertice2().getPosition();
             gd.drawLine(sw.x, sw.y, ne.x, ne.y);
