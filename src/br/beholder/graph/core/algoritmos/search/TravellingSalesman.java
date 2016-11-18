@@ -131,25 +131,17 @@ public class TravellingSalesman {
     
     public void menor_Aresta()
     {
-        Double menor = -1.0;
+        Aresta a = grafo.getArestas().get(0);
         int num = -1;
         for (Aresta aresta : grafo.getArestas()) {
-            num++;
-            if(menor==-1.0)
+            if(a.getPeso()>aresta.getPeso())
             {
-                menor=aresta.getPeso();
-            }
-            else
-            {
-                if(menor>aresta.getPeso())
-                {
-                    menor=aresta.getPeso();
-                }
+                a = aresta;
             }
         }
-        grafo.getArestas().get(num).getVertice1().setVisitado(true);
-        grafo.getArestas().get(num).getVertice2().setVisitado(true);
-        grafo.getArestas().get(num).setHinted(true);
+        a.getVertice1().setVisitado(true);
+        a.getVertice2().setVisitado(true);
+        a.setHinted(true);
         try {
             Thread.sleep(delay);
         } catch (InterruptedException ex) {
