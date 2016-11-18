@@ -16,6 +16,7 @@ import java.awt.Point;
 public class Vertice {
     private final int id;
     private Aresta arestaColocavel;
+    private Aresta[] arestasSubstitutas = new Aresta[2];
     private String rotulo;
     private Point position;
     boolean visitado = false;
@@ -102,6 +103,12 @@ public class Vertice {
     public void setArestaColocavel(Aresta arestaColocavel) {
         this.arestaColocavel = arestaColocavel;
     }
-    
-    
+
+    public Aresta[] getArestasSubstitutas() {
+        return arestasSubstitutas;
+    }
+
+    public void setArestasSubstitutas(Aresta arestasSubstituta, int id) {
+        this.arestasSubstitutas[id] = arestasSubstituta;
+    }
 }

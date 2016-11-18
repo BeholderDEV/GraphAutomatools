@@ -143,6 +143,14 @@
                 <Property name="text" type="java.lang.String" value="300"/>
               </Properties>
             </Component>
+            <Component class="com.alee.laf.button.WebButton" name="webButton8">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Caixeiro Viajante"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="webButton8ActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="com.alee.laf.button.WebButton" name="webButton7">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Colorir"/>

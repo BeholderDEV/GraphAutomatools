@@ -110,6 +110,7 @@ public class MainPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         delayField = new javax.swing.JTextField();
+        webButton8 = new com.alee.laf.button.WebButton();
         webButton7 = new com.alee.laf.button.WebButton();
         webButton6 = new com.alee.laf.button.WebButton();
         webButton5 = new com.alee.laf.button.WebButton();
@@ -171,6 +172,14 @@ public class MainPanel extends javax.swing.JPanel {
 
         delayField.setText("300");
         jPanel3.add(delayField);
+
+        webButton8.setText("Caixeiro Viajante");
+        webButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton8ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(webButton8);
 
         webButton7.setText("Colorir");
         webButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -271,6 +280,10 @@ public class MainPanel extends javax.swing.JPanel {
         controller.coloracao();
     }//GEN-LAST:event_webButton7ActionPerformed
 
+    private void webButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton8ActionPerformed
+        controller.CaixeiroViajante();
+    }//GEN-LAST:event_webButton8ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField delayField;
@@ -294,5 +307,6 @@ public class MainPanel extends javax.swing.JPanel {
     private com.alee.laf.button.WebButton webButton5;
     private com.alee.laf.button.WebButton webButton6;
     private com.alee.laf.button.WebButton webButton7;
+    private com.alee.laf.button.WebButton webButton8;
     // End of variables declaration//GEN-END:variables
 }

@@ -155,6 +155,21 @@ public class Grafo {
         Collections.sort(vizinhos, new OrdenaPorRotulo());
         return vizinhos;
     }
+    public List<Vertice> getVizinhosnaoVizitados(Vertice vertice){
+        List<Vertice> vizinhos = new ArrayList<>();
+        for (Aresta aresta: arestas) {
+            if(!dirigido){
+                if(aresta.getVertice2()==vertice && !aresta.getVertice2().isVisitado()){
+                    vizinhos.add(aresta.getVertice1());
+                }
+            }            
+            if(aresta.getVertice1()==vertice && !aresta.getVertice1().isVisitado()){
+                vizinhos.add(aresta.getVertice2());
+            }
+        }
+        Collections.sort(vizinhos, new OrdenaPorRotulo());
+        return vizinhos;
+    }
     
     
     public boolean hasVertice(int id){

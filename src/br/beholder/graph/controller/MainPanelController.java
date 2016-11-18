@@ -8,6 +8,7 @@ package br.beholder.graph.controller;
 import br.beholder.graph.core.algoritmos.coloracao.Coloring;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithm;
 import br.beholder.graph.core.algoritmos.search.SearchAlgorithmFactory;
+import br.beholder.graph.core.algoritmos.search.TravellingSalesman;
 import br.beholder.graph.core.model.Aresta;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
@@ -33,6 +34,7 @@ public class MainPanelController {
     private Grafo grafo;
     private GraphDrawer drawer;
     private Coloring coloracao;
+    private TravellingSalesman caixeiro;
 
     public MainPanelController(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
@@ -149,6 +151,22 @@ public class MainPanelController {
             setImage(drawImage());
             SwingUtilities.invokeLater(() -> {
                 mainPanel.getTextArea().setText(resposta);
+                mainPanel.setbuttonsEnabled(true);
+            });
+        };
+        SERVICE.submit(r);
+    }
+    
+    public void CaixeiroViajante() {
+        mainPanel.setbuttonsEnabled(false);
+        mainPanel.getTextArea().setText("");
+        Runnable r = () -> {
+            grafo.resetAll();
+            caixeiro =  new TravellingSalesman(grafo, this);
+            grafo=caixeiro.find_path();
+            setImage(drawImage());
+            SwingUtilities.invokeLater(() -> {
+                mainPanel.getTextArea().setText("Caminho encontrado");
                 mainPanel.setbuttonsEnabled(true);
             });
         };

@@ -5,11 +5,15 @@
  */
 package br.beholder.graph.core.algoritmos.search;
 
+import br.beholder.graph.controller.MainPanelController;
+import br.beholder.graph.core.algoritmos.coloracao.Coloring;
 import br.beholder.graph.core.model.Aresta;
 import br.beholder.graph.core.model.Grafo;
 import br.beholder.graph.core.model.Vertice;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,27 +22,30 @@ import java.util.ArrayList;
 public class TravellingSalesman {
     
     private Grafo grafo;
-
-    public TravellingSalesman(Grafo grafo) {
-    
+    int delay = 1000;
+    private final MainPanelController controller;
+    public TravellingSalesman(Grafo grafo, MainPanelController controller) {
+        this.controller = controller;
         this.grafo=grafo;
     }
     
     public Grafo find_path()
     {
-        List<Aresta> escolhidos = null;
-        List<Vertice> possiveis = new ArrayList<>();
+        List<Aresta> escolhidos = null;        
         menor_Aresta();
-        
+        boolean first = true;
         while(!grafo.todosForamVisitados())
         {
+            List<Vertice> possiveis = new ArrayList<>();
             escolhidos = caminhosJaEscolhidos();
             for (Aresta escolhido : escolhidos) {
 //                possiveis.addAll(vizinhosDeAmbos(escolhido.getVertice1(), escolhido.getVertice2()));
                 for (Vertice vertice : grafo.getVertices()) {
-                    List<Vertice> vizinhos = grafo.getVizinhos(vertice);
+                    List<Vertice> vizinhos = grafo.getVizinhosnaoVizitados(vertice);
                     if(vizinhos.contains(escolhido.getVertice1()) && vizinhos.contains(escolhido.getVertice2()))
                     {
+                        vertice.setArestasSubstitutas(grafo.getAresta(escolhido.getVertice1().getId(), vertice.getId()), 0);
+                        vertice.setArestasSubstitutas(grafo.getAresta(vertice.getId(), escolhido.getVertice2().getId()), 1);
                         vertice.setCusto(grafo.getAresta(vertice.getId(), escolhido.getVertice1().getId()).getPeso()+grafo.getAresta(vertice.getId(), escolhido.getVertice2().getId()).getPeso());
                         vertice.setArestaColocavel(escolhido);
                         possiveis.add(vertice);
@@ -58,6 +65,25 @@ public class TravellingSalesman {
                     }
                 }
             }
+            
+            if(!first)
+            {
+                menor.getArestaColocavel().setHinted(false);
+            }
+            else
+            {
+                first=false;
+            }            
+            menor.getArestasSubstitutas()[0].setHinted(true);
+            menor.getArestasSubstitutas()[1].setHinted(true);
+            menor.setVisitado(true);
+            
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            controller.renderColoration(delay);
         }
         
         return grafo;
@@ -109,6 +135,8 @@ public class TravellingSalesman {
                 }
             }
         }
+        grafo.getArestas().get(num).getVertice1().setVisitado(true);
+        grafo.getArestas().get(num).getVertice2().setVisitado(true);
         grafo.getArestas().get(num).setHinted(true);
     }
     
