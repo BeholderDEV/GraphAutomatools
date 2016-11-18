@@ -40,6 +40,7 @@ public class MainPanel extends javax.swing.JPanel {
         WeblafUtils.configurarBotao(webButton5);
         WeblafUtils.configurarBotao(webButton6);
         WeblafUtils.configurarBotao(webButton7);
+        WeblafUtils.configurarBotao(webButton8);
         jPanel1.setBackground(ColorController.COR_PRINCIPAL);
         jLabel1.setForeground(ColorController.COR_LETRA);
         jLabel2.setForeground(ColorController.COR_LETRA);

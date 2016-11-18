@@ -29,7 +29,7 @@ public class TravellingSalesman {
         this.grafo=grafo;
     }
     
-    public Grafo find_path()
+    public Double find_path(int delay)
     {
         List<Aresta> escolhidos = null;        
         menor_Aresta();
@@ -44,25 +44,31 @@ public class TravellingSalesman {
                     List<Vertice> vizinhos = grafo.getVizinhosnaoVizitados(vertice);
                     if(vizinhos.contains(escolhido.getVertice1()) && vizinhos.contains(escolhido.getVertice2()))
                     {
-                        vertice.setArestasSubstitutas(grafo.getAresta(escolhido.getVertice1().getId(), vertice.getId()), 0);
-                        vertice.setArestasSubstitutas(grafo.getAresta(vertice.getId(), escolhido.getVertice2().getId()), 1);
-                        vertice.setCusto(grafo.getAresta(vertice.getId(), escolhido.getVertice1().getId()).getPeso()+grafo.getAresta(vertice.getId(), escolhido.getVertice2().getId()).getPeso());
-                        vertice.setArestaColocavel(escolhido);
-                        possiveis.add(vertice);
+                        
+                        Double custoNovaAresta = grafo.getAresta(vertice.getId(), escolhido.getVertice1().getId()).getPeso()+grafo.getAresta(vertice.getId(), escolhido.getVertice2().getId()).getPeso();
+                        if(vertice.getCusto()==-1.0 || custoNovaAresta<vertice.getCusto())
+                        {
+                            vertice.setArestasSubstitutas(grafo.getAresta(escolhido.getVertice1().getId(), vertice.getId()), 0);
+                            vertice.setArestasSubstitutas(grafo.getAresta(vertice.getId(), escolhido.getVertice2().getId()), 1);
+                            vertice.setCusto(custoNovaAresta);
+                            vertice.setArestaColocavel(escolhido);
+                        }                       
+                        if(!possiveis.contains(vertice))
+                        {
+                            possiveis.add(vertice);
+                        }
                     }
                 }
             }
-            Vertice menor = null;
+            Vertice menor = possiveis.get(0);
             for (Vertice possivel : possiveis) {
-                if(menor==null)
+                if(menor.getCusto()>possivel.getCusto())
                 {
                     menor=possivel;
                 }
-                else{
-                    if(menor.getCusto()>possivel.getCusto())
-                    {
-                        menor=possivel;
-                    }
+                else
+                {
+                    possivel.setCusto(-1.0);
                 }
             }
             
@@ -86,7 +92,7 @@ public class TravellingSalesman {
             controller.renderColoration(delay);
         }
         
-        return grafo;
+        return pesodocaminho();
     }
     
     public List<Vertice> vizinhosDeAmbos(Vertice vertice1, Vertice vertice2)
@@ -138,6 +144,23 @@ public class TravellingSalesman {
         grafo.getArestas().get(num).getVertice1().setVisitado(true);
         grafo.getArestas().get(num).getVertice2().setVisitado(true);
         grafo.getArestas().get(num).setHinted(true);
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Coloring.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        controller.renderColoration(delay);
+    }
+
+    private Double pesodocaminho() {
+        Double soma = 0.0;
+        for (Aresta aresta : grafo.getArestas()) {
+            if(aresta.isHinted())
+            {
+                soma+=aresta.getPeso();
+            }            
+        }
+        return soma;
     }
     
 }

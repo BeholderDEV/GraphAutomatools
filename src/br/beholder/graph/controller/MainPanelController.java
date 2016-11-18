@@ -163,10 +163,10 @@ public class MainPanelController {
         Runnable r = () -> {
             grafo.resetAll();
             caixeiro =  new TravellingSalesman(grafo, this);
-            grafo=caixeiro.find_path();
+            String resposta = "Caminho custa: "+caixeiro.find_path(Integer.parseInt(mainPanel.getDelay()));
             setImage(drawImage());
             SwingUtilities.invokeLater(() -> {
-                mainPanel.getTextArea().setText("Caminho encontrado");
+                mainPanel.getTextArea().setText("Caminho encontrado \n" + resposta);
                 mainPanel.setbuttonsEnabled(true);
             });
         };
